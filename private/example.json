@@ -1,0 +1,110 @@
+[
+ {
+  "cat_num": "6401",
+  "term": "FALL",
+  "bracketed": false,
+  "field": "COMPSCI",
+  "number": "143",
+  "title": "Computer Networks",
+  "faculty": [
+   {
+    "id": "Fab8407c04815d5cc75e496a62d13b31b",
+    "first": "H.T.",
+    "middle": "",
+    "last": "Kung",
+    "suffix": ""
+   }
+  ],
+  "schedule": [
+   {
+    "day": "1",
+    "type": "Lecture",
+    "optional": false,
+    "begin_time": "13:00:00",
+    "end_time": "14:30:00"
+   },
+   {
+    "day": "3",
+    "type": "Lecture",
+    "optional": false,
+    "begin_time": "13:00:00",
+    "end_time": "14:30:00"
+   }
+  ],
+  "locations": [
+   {
+    "type": "Lecture",
+    "building": "Maxwell Dworkin",
+    "room": "119"
+   }
+  ],
+  "description": "Networking has enabled the emergence of mobile and cloud computing, creating the most important technological paradigm shift in computing of the past decade. Further advancements in networking are expected to similarly transform the technological landscape over the next decade through the emergence of the Internet of Things and gigabit wireless networks. In order to play a role in this era of new network-powered advancements, students must have a thorough understanding of emerging networking topics. Rather than teaching the basic networking protocols, which have become very mature and can be treated as a black box, in CS 143, we will teach the new issues and topics of interest which will power important emerging applications. This focus on upcoming applications is the motivation for CS 143 this semester. The class will be organized into the following nine modules: Basic Networking Concepts: Protocol Layering; Internet of Things: All-service Bluetooth Low Energy (BLE); Data Center Networking: Software Defined Networking; Web-scale Networking: Distributed Cloud Computing and Virtual Machine Migration; Content Networks: Video Streaming; Network Security: Defense Against Protocol Exploitation; Wireless Networking: Wireless Mesh, Geographic Routing; Machine Learning Assisted Networking: End-to-end Application Adaptive Protocols; Cyber-physical Networks: Vehicular Networking. Students will have the opportunity to implement the concepts learned in the course through programming assignments, read and discuss the latest networking literature, and design and implement a final project.",
+  "prerequisites": "Strong interest in the subject matter and programming experience (CS50 should be fine). Lab sessions will be provided to give extra support.",
+  "notes": ""
+ },
+ {
+  "cat_num": "74473",
+  "term": "FALL",
+  "bracketed": false,
+  "field": "COMPSCI",
+  "number": "284r",
+  "title": "Topics on Computation in Networks and Crowds",
+  "faculty": [
+   {
+    "id": "F7a10f30a355e2b5af732a540f1c62336",
+    "first": "Yaron",
+    "middle": "",
+    "last": "Singer",
+    "suffix": ""
+   }
+  ],
+  "schedule": [
+   {
+    "day": "1",
+    "type": "Lecture",
+    "optional": false,
+    "begin_time": "10:00:00",
+    "end_time": "11:30:00"
+   },
+   {
+    "day": "3",
+    "type": "Lecture",
+    "optional": false,
+    "begin_time": "10:00:00",
+    "end_time": "11:30:00"
+   }
+  ],
+  "locations": [
+   {
+    "type": "Lecture",
+    "building": "Pierce Hall",
+    "room": "100F"
+   }
+  ],
+  "description": "Topics on the design and analysis of algorithms, processes, and systems related to crowds and social networks. Readings in AI, theoretical CS, machine learning, social science theory, economic theory, and operations research.",
+  "prerequisites": "Mathematics 21b, Applied Mathematics 21b, or equivalent; Computer Science 124, and 181 or 182, or equivalents; or permission of instructor.",
+  "notes": ""
+ },
+ {
+  "cat_num": "97848",
+  "term": "FALL",
+  "bracketed": false,
+  "field": "COMPSCI",
+  "number": "281",
+  "title": "Advanced Machine Learning",
+  "faculty": [
+   {
+    "id": "Fefe45dc30f2e22210fc16a9feda336be",
+    "first": "Ryan",
+    "middle": "Prescott",
+    "last": "Adams",
+    "suffix": ""
+   }
+  ],
+  "schedule": [],
+  "locations": [],
+  "description": "Advanced statistical machine learning and probabilistic data analysis. Topics include: Markov chain Monte Carlo, variational inference, Bayesian nonparametrics, text topic modeling, unsupervised learning, dimensionality reduction and visualization. Requires a major final project.",
+  "prerequisites": "Students should feel comfortable with basic linear algebra and probability theory. Students will be expected to implement algorithms in a programming language such as Matlab, Python or R.",
+  "notes": ""
+ }
+]
