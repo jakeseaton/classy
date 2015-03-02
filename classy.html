@@ -4,65 +4,87 @@ Developed using Meteor by Jake Seaton
 Quincy Dewolfe 20-05
 -->
 
-  <!-- add the checkbox to <body> right below the h1 -->
-  <!-- <label class="hide-completed">
-    <input type="checkbox" checked="{{hideCompleted}}" />
-    Hide Completed Tasks
-  </label> -->
-  <!-- add a form below the h1 -->
-  <!-- {{#if currentUser}} -->
-  <!-- <form class="new-task">
-    <input type="text" name="text" placeholder="Type to add new tasks" />
-  </form> -->
-  <!--{{/if}} -->
 <head>
-  <title>Classie</title>
-  <link href = "img/new_classy_logo" rel = "icon"></link>
+  <title>Classy</title>
+  <link href = "img/new_classy_logo.png" rel = "icon"></link>
 </head>
 
 <body>
-  <!-- CS50 ID 368f46e3019f952ebf91f5a00b780386-->
-  <!-- wine thing key Xkey=jkstnx466601-->
-  {{>classy_header}}
+
+</body>
+
+<template name = "home">
+<!-- CS50 ID 368f46e3019f952ebf91f5a00b780386-->
+<!-- wine thing key Xkey=jkstnx466601-->
+{{>classy_header}}
 <!-- <div id = "wrapper">
-  <div id = "center">
-    {{>viewer}}
-  </div>
+<div id = "center">
+  {{>viewer}}
+</div>
 </div> -->
 <div id = "wrapper">
-  {{>DrawerLeft}}
-  <div id = "center">
-    <div id = "search-bar" class="container">
-      {{>search}}
-    </div>
-    {{>viewer}}
+{{>DrawerLeft}}
+<div id = "center">
 
-    {{>main}}
-      <!-- Browse<br> -->
-      <!-- <a href = "http://harvardlampoon.com/comp/">Reservations</a><br> -->
-      <!-- <a href = "http://hardlampoon.com/masthead">Staff</a><br> -->
-      <!-- awards<br> -->
-      <!-- <a href = "http://harvardlampoon.com/subscribe">Connect</a><br> -->
-    <!-- <div id = "display courses"> -->
+  {{>viewer}}
+    <!-- Browse<br> -->
+    <!-- <a href = "http://harvardlampoon.com/comp/">Reservations</a><br> -->
+    <!-- <a href = "http://hardlampoon.com/masthead">Staff</a><br> -->
+    <!-- awards<br> -->
+    <!-- <a href = "http://harvardlampoon.com/subscribe">Connect</a><br> -->
+  <!-- <div id = "display courses"> -->
+</div>
+{{> classy_footer}}
+</div>
+</template>
+
+<template name = "mycourses">
+  {{>classy_header}}
+  <div id = "wrapper">
+  <div id = "drawer">
+    <div id = "results">
+      <ul id = "search-results-table">
+        {{#each favoriteCourses}}
+          {{> course}}
+        {{/each}}
+      </ul>
+    </div>
   </div>
-  {{>DrawerRight}}
-  <!-- </div> -->
-    <!-- <table id = "menu">
-      <thead>
-        <tr id = "head-row"><th>Number</th><th>Name</th><th>Make</th></tr>
-      </thead>
-      {{#each courses}}
-        {{> course}}
-      {{/each}}
-    </table> -->
-  <!-- <div id = "right"> -->
-      <!-- {{>Carousel}} -->
-      <!-- {{>Drawer}} -->
-      <!-- Putting all of the menus here -->
-      <!-- {{>menu}} -->
-  <!-- </div> -->
-  <!-- {{>Carousel}} -->
+  <div id = "center">
+    {{> viewer}}
+  </div>
+  {{> classy_footer}}
 
 </div>
-<footer>{{>footer}}<div class = "whitespace"></div></footer>
-</body>
+
+</template >
+
+<template name = "mymenu">
+  {{>classy_header}}
+
+  <div id = "wrapper">
+    <div id = "card">
+      {{#each studyCard}}
+      <span>{{title}}<br>{{Overall}}</span><br>
+      {{/each}}
+    <div id = "print"><img src = "img/print.png"/></div>
+</div>
+  <!-- <div id = "classification">Classification</div> -->
+</div>
+  {{>classy_footer}}
+</template>
+
+
+<template name = "loginpage">
+  <div id = "login-page">
+  <a href = "/"><img src = "img/new_classy_logo.png"></a><br>
+  {{> loginButtons}}
+</div>
+  {{> classy_footer}}
+
+</template>
+
+<template name = "classy_footer">
+  <footer><br><br><div class = "whitespace invisible"></div></footer>
+
+</template>

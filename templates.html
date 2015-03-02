@@ -3,65 +3,34 @@ Templates for Classy
 Developed using Meteor by Jake Seaton
 Quincy-Dewolfe 20-05
 -->
-<template name = "main">
-  {{#if viewingMenuBool}}
-    MENU
-    {{userMenu}}
-  {{else}}
-    {{#if viewingMyCoursesBool}}
-      <div id = "results">
-        MY COURSES
-        <ul id = "search-results-table">
-          {{userCourses}}
-          {{#each userCourses}}
-            {{>course}}
-          {{/each}}
-        </ul>
-      </div>
-    {{else}}
-      <div id = "results">RESULTS<br>
-        <ul id = "search-results-table">
-          {{>result}}
-        </ul>
-        <!-- <table id = "search-results-table"> -->
-          <!-- <thead> -->
-            <!-- <tr id = "head-row"><th>Course</th><th>Name</th><th>Number</th></tr> -->
-          <!-- </thead> -->
-          <!-- {{#each courses}}
-            {{> course}}
-          {{/each}} -->
-          <!-- {{>result}} -->
-        <!-- </table> -->
-      </div>
-    {{/if}}
-  {{/if}}
 
-</template>
+
 <!-- Header -->
-
 <template name = "classy_header">
   <header>
-    <div class ="whitespace"></div>
-  <img src = "img/new_classy_logo.png"/>
-  <!-- <h1> arvard</h1> -->
-  <h1 id = "my-courses">My Courses</h1>
-  <h1 id = "my-menus">My Menu</h1>
+    <div class ="whitespace invisible"></div>
 
-  <!-- <h1>My Second Courses</h1>
-  <h1>My Third Courses</h1>
-  <h1>My Fourth Courses</h1> -->
-  <!-- {{>search}} -->
+  <!-- <h1> arvard</h1> -->
+
+  <a href = "/"> <img src = "img/new_classy_logo.png"/></a>
+  <h1> <div id = "search-bar">
+    {{>search}}
+  </div></h1>
+  <a href = "mymenu"><h1 id = "my-menus">Study Card</h1></a>
+  <a href = "/mycourses"><h1 id = "my-courses">My Courses</h1></a>
   {{#if currentUser}}
-  <h1 id = "user-greeting">Bonjour, {{currentUser.username}}</h1>
+  <a href = "/login"><h1>Log Out</h1></a>
+  <!-- <h1 id = "user-greeting">Bonjour, {{currentUser.username}}</h1> -->
   {{else}}
-  <h1 id = "login-button">{{> loginButtons}}</h1>
+  <a href = "/login"><h1>Log In</h1></a>
+  <!-- <a href = "/login"><h1 id = "login">{{> loginButtons}}</h1></a> -->
   {{/if}}
+  <div class = "redspace invisible"></div>
   <!-- {{>loginButtons}} -->
   <!-- <h1><a>Classy</a>
   <div class ="whitespace"></div> -->
   </header>
 </template>
-
 
 <!-- Search results  -->
 <template name = "result">
@@ -102,12 +71,13 @@ Quincy-Dewolfe 20-05
   <!-- the li-text thing is doing all of the styling -->
   <!-- {{}} also get the course number and put it at the end-->
   <li>
+
     <!-- {{{course_number}}}<br> -->
-    <div class = "wine-match"><img src = "img/redwine.png"/>Best With:<br><a href = "yo" class = "wine-name">{{{Wine1.Name}}}</a></div>
+    <!-- <div class = "wine-match"><img src = "img/redwine.png"/>Best With:<br><a href = "yo" class = "wine-name">{{{Wine1.Name}}}</a></div> -->
 
-    <div class = "course-info">{{{field}}} {{{number}}}: {{{title}}}<br><!-- <img src = "img/chef_hat.png"/>-->{{{faculty_last}}}</div>
-    <img class = "star" src = "img/add-to-list.svg"/>
-
+    <div class = "course-info">{{{field}}} {{{number}}}: {{{title}}}<br><!-- <img src = "img/chef_hat.png"/>--></div>
+    <!-- <img class = "star" src = "img/add-to-list.svg"/> -->
+    <img src = "img/chevron-thin-right.svg" class = "invisible">
   </li>
   <!-- <tr class = "course-row"><th class = "left">{{{course_number}}}</th><th style = "text-align: left">{{{title}}}</th><th style = "text-align: left">{{{field}}} {{{number}}}</th><th><img class = "invisible" src = "img/chevron-thin-right.svg"/></th></tr> -->
   <!-- What do you want to do with the {{{description}}} -->
@@ -121,10 +91,10 @@ Quincy-Dewolfe 20-05
       <input id = "search-box" type = "text" name = "text" placeholder = "search courses" class = "search-box"/><br>
       <!-- HAVE AN ARROW HERE THAT ONLY DISPLAYS OPTIONS WHEN OPENED.-->
       <!-- checked = {{checked}}-->
-      <input type = "checkbox" class = "toggle-checked"/><label>First</label>
+      <!-- <input type = "checkbox" class = "toggle-checked"/><label>First</label>
       <input type = "checkbox" class = "toggle-checked"/><label>Second</label>
       <input type = "checkbox" class = "toggle-checked"/><label>Third</label>
-      <input type = "checkbox" class = "toggle-checked"/><label>Fourth</label>
+      <input type = "checkbox" class = "toggle-checked"/><label>Fourth</label> -->
       <!-- <input type = "checkbox" class = "toggle-checked"/><label>Wines</label> -->
       <!-- <input type="checkbox" checked="{{hideCompleted}}">Hide finished courses</input> -->
   </form>
@@ -133,111 +103,7 @@ Quincy-Dewolfe 20-05
 
 <!-- Background image carousel -->
 
-<template name = "Carousel">
-  <div id="myCarousel" class="carousel slide" data-pause = "false">
-    <!-- <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol> -->
-    <!-- Carousel items -->
-    <div class="carousel-inner">
-      <div class="active item"><img src = "pics/1.jpg" alt/></div>
-      <!-- <div class="item"><img src = "pics/2.jpg" alt/></div> -->
-      <div class="item"><img src = "pics/17derp.jpg" alt/></div>
 
-      <div class="item"><img src ="pics/3.jpg" alt/></div>
-      <div class="item"><img src = "pics/4.jpg" alt/></div>
-      <div class="item"><img src = "pics/5.jpg" alt/></div>
-      <div class="item"><img src ="pics/6.jpg" alt/></div>
-      <div class="item"><img src = "pics/7.jpg" alt/></div>
-      <div class="item"><img src = "pics/8.jpg" alt/></div>
-      <div class="item"><img src ="pics/9.jpg" alt/></div>
-      <div class="item"><img src = "pics/10.jpg" alt/></div>
-      <div class="item"><img src = "pics/11.jpg" alt/></div>
-      <div class="item"><img src ="pics/12.png" alt/></div>
-      <div class="item"><img src = "pics/13.jpg" alt/></div>
-      <div class="item"><img src = "pics/14.jpg" alt/></div>
-      <div class="item"><img src ="pics/15.jpg" alt/></div>
-      <div class="item"><img src = "pics/16.jpg" alt/></div>
-      <div class="item"><img src ="pics/18.jpg" alt/></div>
-      <div class="item"><img src = "pics/19.jpg" alt/></div>
-      <div class="item"><img src = "pics/20.jpg" alt/></div>
-    </div>
-    <!-- Carousel nav -->
-    <!-- <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a> -->
-  </div>
-</template>
-
-
-<!-- inidividual menus -->
-<template name = "menu">
-  <div class = "menu">
-    {{#if viewingMenus}}
-      {{#each currentMenu}}
-      {{>menu_course}}
-      {{/each}}
-      <div class = "wine">
-      <img class = "icon" src = "img/wine.png"/>
-      ...wine suggestions...
-      <img class = "icon" src = "img/shop.png"/>
-    </div><br>
-
-      <img class = "icon" src = "img/print.png"/>
-      <img class = "icon" src = "img/share.png"/>
-    {{else}}
-      EXAMPLE MENU<br>
-      {{#each exampleMenu}}
-      {{>menu_course}}
-      {{/each}}
-      <div class = "wine">
-      <img class = "icon" src = "img/wine.png"/>
-      ...wine suggestions...
-      <img class = "icon" src = "img/shop.png"/>
-    </div><br>
-
-      <img class = "icon" src = "img/print.png"/>
-      <img class = "icon" src = "img/share.png"/>
-    {{/if}}
-    <!-- <div class = "first course-title">
-      first course
-    </div>
-    {{>menu-course}}
-    <div class = "second course-title">
-      second course
-    </div>
-    {{>menu-course}}
-    <div class = "third course-title">
-      third course
-    </div>
-    {{>menu-course}}
-    <div class = "fourth course-title">
-      fourth course
-    </div>
-    {{>menu-course}} -->
-
-
-
-  <!-- <div>{{> this}}</div> -->
-
-  <!-- <table id = "menu">
-    <thead>
-      <tr id = "head-row"><th>Number</th><th>Name</th><th>Make</th></tr>
-    </thead>
-    {{#each courses}}
-      {{> course}}
-    {{/each}}
-  </table> -->
-  </div>
-</template>
-
-<template name = "menu_course">
-  {{course_number}}<br>
-  {{title}}<img class = "delete" src = "img/delete.png"/><br>
-
-  {{description}}<br>
-</template>
 
 
 <!-- <template name = "all_menus">
@@ -252,16 +118,21 @@ Quincy-Dewolfe 20-05
 </template> -->
 
 <template name = "DrawerLeft">
-  <div id = "drawer-left" class = "drawer invisible">
-    {{#each coursesToView}}
-      {{course_number}}
-      {{title}}
-      {{faculty}}
-      {{description}}
-      <!-- {{schedule}} -->
-      <!-- Save, add to menus -->
-      <img class = "star" src = "img/add-to-list.svg"/>
-    {{/each}}
+  <div id = "drawer">
+    <div id = "results">
+      <ul id = "search-results-table">
+        {{>result}}
+      </ul>
+      <!-- <table id = "search-results-table"> -->
+        <!-- <thead> -->
+          <!-- <tr id = "head-row"><th>Course</th><th>Name</th><th>Number</th></tr> -->
+        <!-- </thead> -->
+        <!-- {{#each courses}}
+          {{> course}}
+        {{/each}} -->
+        <!-- {{>result}} -->
+      <!-- </table> -->
+    </div>
   </div>
   <!-- {{#if viewingCourses}}
   <div class = "drawer">
@@ -279,49 +150,74 @@ Quincy-Dewolfe 20-05
   {{/if}} -->
 
 </template>
-<template name = "DrawerRight">
-  <div id = "drawer-right" class = "drawer invisible">
-    {{#each coursesToView}}
-    <img class = "star" src = "img/add-to-list.svg"/>
-    {{/each}}
-  </div>
-  <!-- {{#if viewingCourses}}
-  <div class = "drawer">
-        {{#each coursesToView}}
-        {{course_number}}<br>
-        {{title}}<br>
-        {{faculty}}<br>
-        {{description}}<br>
-        {{schedule}}<br> -->
-        <!-- Save, add to menus -->
-        <!-- <img class = "star" src = "img/add-to-list.svg"/>
-        {{/each}}
 
-  </div>
-  {{/if}} -->
-
-</template>
-<template name = "footer">
-CLASSY FOOTER
-</template>
-<!-- <template name = "overlay">
-  <div class = "overlay"></div>
-</template> -->
 <template name = "viewer">
-  <div id = "viewer">
-  Course Name
-  Course Description
-  Difficulty
-  Workload
-  Suggestions
-  Midterm
-  Final
-  Section
-  Lecture
-  Add to Menu
-  Save to Courses
-  Option to go buy all of those things
-  Cocaine alerts you to go buy it yourself
+  <div id = "viewer" class = "invisible">
+    {{#each coursesToView}}
+    <div class = "course-info">
+
+{{{field}}} {{{number}}}: {{{title}}} <br>
+    {{{faculty_last}}}<br>
+    {{{description}}}<br>
+
+    <div class = "suggestions">
+
+      Suggestions:<br>
+      <div class = "bars">
+        <div class = "bar">Overall: {{{Overall}}}</div>
+        <div class = "bar" >Difficulty: {{{Difficulty}}}</div>
+        <div class = "bar" >Workload: {{Workload}}</div>
+        <!--
+        <div class = "bar">Overall:<div class = "bar-inner">{{{Overall}}}</div></div>
+        <div class = "bar">Difficulty: <div class = "bar-inner">{{{Difficulty}}}</div></div>
+        <div class = "bar">Workload:<div class = "bar-inner" width="{{workload}}px">{{Workload}}</div></div> -->
+      </div>
+      {{#each current_suggestions}}
+      {{>suggestion}}
+      {{/each}}
+      <br>
+      <img class = "add" src = "img/plus.png"><img class = "star" src = "img/gold_star.png"><img id = "refresh" src = "cycle.svg"/>
+
+    </div>
+
+
+  <!-- Comments/Explanation(-> Bars) -->
+    </div>
+    <div class = "comments invisible">
+      <ul class = "comment-list">
+      <!-- Maybe replace all of the professor names with the name of the product?-->
+      <li> This course will pleasantly surprise you. By the end of the semester, your relationship with {{{Wine1.Name}}} will completely change. Most engaging and meaningful gen ed. course.</li>
+      <li> This class was amazing. Professor Kung is legitimately hilarious, and I learned a good amount about networks. Shop the class before you enroll though, since {{{Wine2.Name}}} might not be for you.</li>
+    </ul>
+      <!-- {{#each comments}}
+        Course Name<br>
+        Course Description<br>
+        Difficulty<br>
+        Workload<br>
+        Suggestions<br>
+        Midterm<br>
+        Final<br>
+        Section<br>
+        Lecture
+        Add to Menu
+        Save to Courses
+        Option to go buy all of those things
+        Cocaine alerts you to go buy it yourself
+      {{/each}} -->
+
+    </div>
+    <!-- <img height = "36px" width = "36px" class = "star" src = "img/add-to-list.svg"/> -->
+
+    {{/each}}
+
 </div>
 
+</template>
+<template name = "shop">
+  <iframe id = "shop" src = "{{shopUrl}}">
+  </iframe>
+
+</template>
+<template name = "suggestion">
+  <a href = "{{Url}}"><div class = "suggestion-item" ><!--<ul class = "wine-glass">--><div class = "circle"><img src = "{{Icon}}"><i class = "invisible">{{Proof}}%</i></div><!--</ul> <b>Lecture:</b>--><br><div class = "wine-name"> {{{Name}}}<br></div></div></a>
 </template>

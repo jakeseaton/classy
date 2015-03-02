@@ -2,33 +2,42 @@
 // Developed using Stylus by Jake Seaton
 // Quincy Dewolfe 20-05
 
+/* Global Vars */
 @import url("http://fonts.googleapis.com/css?family=Great+Vibes|Gruppo");
+Parchment_url = url("img/parchment.jpg")
+
 Text_font_family = "Gruppo", cursive
 Classy_font = 60px 'Great Vibes', cursive
+
+// Color Scheme
 Gold = #BC9D52//#FFD600
 Black = #2B2A2A//#616161
-White = #F5F5F5
+White = #E5E8ED//#F5F5F5
+Blank = #FFFFFF
 Red = #EA212E//#B71C1C
 Blue = #90A4AE
 Cream = #FFFDE7
 
-Classy_color = White
-Classy_background_color = Black
-Background_color = White
+header_background_color = Black
+results_background_color = Gold
 
 nav_bar_width = 35%
 right_width = 100% - nav_bar_width
 
-menu_width = 60%
-drawer_width = (100% - menu_width) / 2
-drawer_height = 30%
+center_width = 60%
+drawer_width = 100% - center_width
+drawer_height = 100%
+viewer_height = 480px
 
 square_image()
   width arguments
   height arguments
 
+
+/* Header */
+
 header
-  background Classy_background_color
+  background header_background_color
   // background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
   // padding 20px 15px 15px 15px
   //position relative
@@ -48,7 +57,7 @@ header
     // color Classy_color
 
     color White
-    background-color Classy_background_color
+    background-color header_background_color
     font Classy_font
     font-size 30px
     // margin 0
@@ -63,22 +72,66 @@ header
       color Red
       cursor pointer
 
-  #login-button
+  #login
     float right
-    margin-top 30px
+    top auto
+    bottom auto
+    margin-top 20px
     margin-right 100px
   #user-greeting
 
     float right
-    margin-top 30px
+    margin-top 20px
     margin-right 100px
-.whitespace
-    margin-top 0
-    background-color Gold
-    opacity 1
-    height 5px
+
+  #search-bar
+    // position absolute
+    // top 0
+    // left 35%
+    // right 35%
+    // display inline-block
+    margin-left 0
+    margin-right auto
+    height 30%
     width 100%
-    position absolute
+    max-height 95px
+    width 75% !important
+    width nav_bar_width
+    background-color Black
+    text-align center
+    color Cream
+
+    form.search-form
+        // font Classy_font
+        // .toggle-checked
+        label
+          font Classy_font
+          font-size 20px
+          display inline-block
+        .search-box
+          margin-bottom 0
+          font Classy_font
+          // border 5px solid Gold
+          font-size 30px
+          color Blue
+          width 90%
+          border none
+          height 40px
+          border-radius 0
+        .toggle-checked
+          display inline-block
+  #login-buttons
+    display inline-block
+    float right
+  .redspace
+    width 100%
+    background-color Red
+    height 10px
+
+
+/* End Header */
+
+
   // #search
   //   height 100%
   //   display inline-block
@@ -103,74 +156,156 @@ header
   //         border-radius 0
   //       .toggle-checked
   //         display inline-block
-.carousel
-  // position absolute
-  width 100%
-  height 100%
-  top 0
-  bottom 0
-  position absolute
-  // z-index 0
-  img
-    width 100%
-    bottom 0
-    height 100%
+// .carousel
+//   // position absolute
+//   width 100%
+//   height 100%
+//   top 0
+//   bottom 0
+//   position absolute
+//   // z-index 0
+//   img
+//     width 100%
+//     bottom 0
+//     height 100%
+
+
+/* Body */
 body
-  // background-color Background_color
-  background-image url("img/parchment.jpg")
+  overflow hidden
+  /* overflow hidden? */
+  // background-image Parchment_url
+  background-color #E5E8ED
   font-family Text_font_family
-  // // background-color White
-  // background-color: #315481;
-  // background-image: linear-gradient(to bottom, #315481, #918e82 100%);
-  // background-attachment: fixed;
-  // position absolute
-  // top 0
-  // bottom 0
-  // left 0
-  // right 0
-  // margin 0
-  // font-size 14px
 
 
 #wrapper
   width 100%
-  height 90%
+  height 70%
+  display inline-block
   position relative
-  z-index 20
-  top 10%
+  // position relative
+  // z-index 20
+  // top 10%
   // text-align center
   // display inline-block
   // overflow hidden
   // overflow scroll
-  .drawer
+  #card
     position absolute
+    margin-left auto
+    margin-right auto
+    display inline-block
+    height 450px
+    width 40%
+    left 25%
+    right 25%
+    top 10px
+    box-shadow 1px 1px 1px Black
+    border-bottom 2px solid Red
+    &:hover
+      box-shadow 2px 2px 2px Black
+
+    // border-left 1px solid Black
+    // border-right 1px solid Blank
+    // border-radius 20px
+    background Blank
+    // font Classy_font
+    text-align center
+    font-size 40px
+    z-index 10
+      &:hover
+        border-bottom 1px solid Blue
+    #print
+      bottom 0
+      position absolute
+      width 100%
+      text-align center
+      img
+        width 36px
+        height 36px
+
+  #drawer
+    position relative
+    overflow scroll !important
+    float left
     color Cream
-    background-color Black
-    height drawer_height
+    // background-image Parchment_url
+    height 600px
     width drawer_width
     z-index 0
-    top 20%
-    bottom 0
-    opacity .5
-    overflow scroll
-    .star
-      square_image(36px)
-  #drawer-left
-    left -1000px
-    right auto
-  #drawer-right
-    left auto
-    right -1000px
+    // top 20%
+    // bottom 0
 
+
+    #results
+      // background-color Red
+      width 100%
+      text-align center
+      color Black
+      // margin-top 0
+      margin-left auto
+      margin-right auto
+      position relative
+      bottom 0
+      #search-results-table
+        left 10px
+        height 100%
+        width 100%
+        font-size 20px
+      ul
+        // font Classy_font
+        margin-left auto
+        margin-right auto
+        list-style-type none
+        li
+          // background-image url("img/parchment.jpg")
+          // background-image Parchment_url
+          background-color Blank
+          left 0
+          right 0
+          height 100px
+          width 100%
+          margin-bottom 5px
+          margin-top 5px
+          border-left 5px solid White
+          border-bottom 5px solid Red
+          border-radius 5px
+          // font Classy_font
+          // font-size 20px
+          &:hover
+            border-left 5px solid Red
+            border-bottom 5px solid Red
+            box-shadow 1px 1px 1px Black
+            border-radius 5px
+          img
+            square_image(36px)
+            float right
+          .course-info
+            // font Classy_font
+            // font-size 10px
+            top 0
+            left 0
+            margin-right 0px
+            width 80%
+            text-align left
+            font-size 18px
+          .wine-match
+            float right
+            width 20%
+            height 100%
+            overflow hidden
+            top 0
+            right 0px
 
   #center
-    top 0
     // margin-bottom 0
     // display block
     position relative
     text-align center
     // display inline-block
-    width 100%
+    width center_width
+    float right
     min-height 100%
     // height 100%
     overflow scroll
@@ -178,203 +313,238 @@ body
     // background-image url("img/parchment.jpg")
     // left 25%
     // right 25%
-  #search-bar
-    // position absolute
-    // top 0
-    // left 35%
-    // right 35%
-    // display inline-block
+    #viewer
+      a
+        text-decoration none
+        color Black
+      img
+        width 36px
+        height 36px
+
+      font-size 20px
+      font-weight bold
+      margin-top 10px
+      // border-radius 20px
+      height viewer_height
+      // box-shadow 10px 10px 10px #888888
+      // height 90%
+      background-color Blank
+      margin-left auto
+      width 90%
+      margin-right auto
+      // background-color Black
+      // background-image Parchment_url
+      border 1px solid Red
+      box-shadow 1px 1px 1px Black
+      color Black
+      // .course-info
+      //   .wine-glass
+      //     square_image(36px)
+      #refresh
+        square_image(36px)
+        &:hover
+          cursor pointer
+
+      .star
+        // float left
+        &:hover
+          cursor pointer
+      .add
+        // float left
+        // margin-left 10px
+        &:hover
+          cursor pointer
+      .bars
+        // text-align left
+        display inline-block
+        text-align center
+        width 100%
+        bottom 0
+        margin-bottom 0
+        .bar
+          display inline-block
+          text-align center
+          width 30% !important
+        // .bar
+        //   display inline-block
+        //   .bar-inner
+        //     display inline-block
+        //     background-color Red
+      .suggestions
+        overflow scroll
+        display inline-block
+        height 190px
+        width 100%
+        // direction rtl
+        bottom 15px
+        position absolute
+        margin-right auto
+        margin-left auto
+        left 0
+        .circle
+          border 1px solid Black
+          border-radius 18px
+          width 36px
+          height 36px
+          margin-left auto
+          margin-right auto
+          text-align center
+          i
+            position relative
+            top 25%
+            bottom auto
+        .wine-glass
+          margin-bottom 0
+
+
+          top 0
+          border-radius 18px
+          border 1px solid Black
+          .proof
+            margin-left auto
+            margin-right auto
+            margin-top auto
+            margin-bottom auto
+            position absolute
+        .wine-name
+          // position relative
+          height 40%
+          overflow hidden
+          width 100%
+        .suggestion-item
+          width 30%
+          display inline-block
+          height 100px
+          top 0
+          // bottom 0
+          &:hover
+            cursor pointer
+            border-bottom 1px solid Red
+
+      .comments
+        bottom 0
+        position absolute
+        border-radius 20px
+        width 80%
+        height 30%
+        overflow scroll
+        background-color Red
+        // position relative
+        ul.comment-list
+          list-style-type none
+          li
+            border-bottom 5px solid Grey
+/* Login page */
+#login-page
+  top 10%
+  position absolute
+  width 100%
+  height 100%
+  text-align center
+  img
+    width 200px
+    height 200px
     margin-left auto
     margin-right auto
-    height 30%
-    max-height 95px
-    width 75% !important
-    width nav_bar_width
-    background-color Black
-    text-align center
-    color Cream
+    display inline block
 
-    form.search-form
-        // font Classy_font
-        // .toggle-checked
-        label
-          font Classy_font
-          font-size 20px
-          display inline-block
-        .search-box
-          font Classy_font
-          // border 5px solid Gold
-          font-size 30px
-          color Blue
-          width 90%
-          border none
-          height 40px
-          border-radius 0
-        .toggle-checked
-          display inline-block
-
-#results
-  background-color Blue
-  width 60%
-  min-height 100%
-  height 100%//100px
-  text-align center
-  color White
-  // margin-top 0
-  margin-left auto
-  margin-right auto
-  overflow scroll
-  #search-results-table
-    height 100%
-    width 100%
-    font-size 20px
-  ul
-    margin-left 0
-    list-style-type none
-    li
-      left 0
-      right 0
-      height 100px
-      border 5px solid Blue
-      border-bottom 5px solid Cream
-      // font Classy_font
-      // font-size 20px
-      &:hover
-        border 5px solid Red
-        border-radius 5px
-      img
-        square_image(36px)
-      .course-info
-        // font Classy_font
-        // font-size 10px
-        top 0
-        left 0
-        margin-right 0px
-        width 80%
-        text-align left
-        font-size 18px
-      .wine-match
-        float right
-        width 20%
-        height 100%
-        overflow hidden
-        top 0
-        right 0px
-        // position absolute
-
-        // position absolute
-        // position absolute
-  // table#search-results-table
-  //     height 100%
-  //     width 100%
-  //     font-size 12px
-  //   #head-row
-  //     width 100%
-
-
-  tr
-    .left
-      border-left 10px
-    // font Classy_font
-    &:hover
-      color Red
-      cursor pointer
-      .left
-        border-left 10px solid Red
-      // #search-results-table
-  //   overflow scroll
-
-#right
-  width right_width
+/* Footer/other */
+iframe
+  width 100%
   height 100%
-  // margin 0 auto
-  // margin-left 0 !important
-  float right
-  position relative
-  // margin-right 0 !important
+  position absolute
+  background-color white
 
-  .drawer
-    position absolute
-    color Cream
-    background-color Black
-    height 60%
-    width drawer_width
-    z-index 10
-    top 20%
-    bottom 0
-    left 0
-    opacity .9
-    overflow scroll
-    .star
-      square_image(36px)
-
-  .menu
-    position absolute
-    top 0
-    bottom 0
-    right 0
-    z-index 10
-    text-align center
-    margin-left 0
-
-    // margin-right 10%
-    // margin-right 10%
-    background-color Cream
-    // margin-top 10%
-    margin-bottom 10%
-    width menu_width
-    height 100%
-    // box-shadow 10px 10px 5px #888888
-    opacity .8
-    // opacity 1
-    overflow scroll
-
-    .course-title
-      font Classy_font
-      font-size 20px
-      color Black
-    .icon
-      square_image(36px)
-    .delete
-      square_image(20px)
-
-#login-buttons {
-  display: inline-block;
-  float right
-}
-
-
-
-
-  // position absolute
-
-
-//       // Actually add some border.
 footer
   width 100%
-  height 10%
+  height 5%
   z-index 20
   bottom 0
   background-color Black
   position fixed
+.whitespace
+  margin-top 0
+  background-color Gold
+  opacity 1
+  height 5px
+  width 100%
+  position absolute
+
 
 .invisible
   display none
-// .overlay
-//   width 100%
-//   height 100%
-//
-//   position absolute
-//   z-index 20
-//   background-color Blue
-//   opacity .5
 
-#viewer
-  height 400px
-  // change this to %--it's not working for some reason
-  width 80%
-  background-color Black
-  color Cream
-  margin-left auto
-  margin-right auto
-  // position relative
+/* Login Buttons */
+#login-buttons
+  .login-link-text
+    font Classy_font
+
+
+  //
+  //
+  //       <div class="login-link-and-dropdown-list login-form-sign-in">
+  //
+  //
+  //     <a class="login-link-text" id="login-sign-in-link">Sign in ▾</a>
+  //     <div id="login-dropdown-list" class="accounts-dialog">
+  //       <a class="login-close-text">Close</a>
+  //
+  //       <div class="login-close-text-clear"></div>
+  //
+  //
+  //
+  //
+  //   <div class="login-form login-password-form">
+  //
+  //
+  //
+  //
+  //   <div id="login-username-label-and-input">
+  //     <label id="login-username-label" for="login-username">
+  //       Username
+  //     </label>
+  //     <input id="login-username" type="text">
+  //   <span style="opacity: 1; left: 808px; top: 273.5px; width: 19px; min-width: 19px; height: 13px; position: absolute; border: none; display: inline; visibility: visible; z-index: auto; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAANCAYAAABLjFUnAAAACXBIWXMAAAsTAAALEwEAmpwYAAABMmlDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjarZG9SsNQGIaf04qCQxAJbsLBQVzEn61j0pYiONQokmRrkkMVbXI4Of508ia8CAcXR0HvoOIgOHkJboI4ODgECU4i+EzP9w4vL3zQWPE6frcxB6PcmqDnyzCK5cwj0zQBYJCW2uv3twHyIlf8RMD7MwLgadXr+F3+xmyqjQU+gc1MlSmIdSA7s9qCuATc5EhbEFeAa/aCNog7wBlWPgGcpPIXwDFhFIN4BdxhGMXQAHCTyl3AtercArQLPTaHwwMrN1qtlvSyIlFyd1xaNSrlVp4WRhdmYFUGVPuq3Z7Wx0oGPZ//JYxiWdnbDgIQC5M6q0lPzOn3D8TD73fdMb4HL4Cp2zrb/4DrNVhs1tnyEsxfwI3+AvOlUD7FY+VVAAAAIGNIUk0AAHolAACAgwAA9CUAAITRAABtXwAA6GwAADyLAAAbWIPnB3gAAAECSURBVHjapNK9K8UBFIfxD12im8LEYLgZjcpgUFgUCUlZTJRkMpqUxR+hDFIGhWwGwy0MFiUxSCbZ5DXiYjnqdvvpvnim0+mcZ/ieU9U6tySBNEbQjBpMoANZnGIdl4VLKcm8YCPqbgzhAT1ox1mSrFpxjtCHLdygH5tJgymlMYhhtKH+r6FishYsYBpN0dvFHu5wi9okWToC/0AmcpqM+pd7PKMRDajDNb5xlS97Qyem0BsL8IT9uOAhXpGLvL/wGXO5fFkOO7FwHvJtLOOilGALM8vE1d6xiFVlkP8aXTjAI8bKFeXLBuJ3shjFiQpIYR6zWMFaXFOlsnHM4Ng/+RkAdVE2mEeC7WYAAAAASUVORK5CYII=); background-size: 19px 13px; background-position: 0px 0px; background-repeat: no-repeat;"></span></div>
+  //
+  //
+  //
+  //
+  //
+  //   <div id="login-password-label-and-input">
+  //     <label id="login-password-label" for="login-password">
+  //       Password
+  //     </label>
+  //     <input id="login-password" type="password">
+  //   <span style="opacity: 1; left: 808px; top: 338.5px; width: 19px; min-width: 19px; height: 13px; position: absolute; border: none; display: inline; visibility: visible; z-index: auto; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAANCAYAAABLjFUnAAAACXBIWXMAAAsTAAALEwEAmpwYAAABMmlDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjarZG9SsNQGIaf04qCQxAJbsLBQVzEn61j0pYiONQokmRrkkMVbXI4Of508ia8CAcXR0HvoOIgOHkJboI4ODgECU4i+EzP9w4vL3zQWPE6frcxB6PcmqDnyzCK5cwj0zQBYJCW2uv3twHyIlf8RMD7MwLgadXr+F3+xmyqjQU+gc1MlSmIdSA7s9qCuATc5EhbEFeAa/aCNog7wBlWPgGcpPIXwDFhFIN4BdxhGMXQAHCTyl3AtercArQLPTaHwwMrN1qtlvSyIlFyd1xaNSrlVp4WRhdmYFUGVPuq3Z7Wx0oGPZ//JYxiWdnbDgIQC5M6q0lPzOn3D8TD73fdMb4HL4Cp2zrb/4DrNVhs1tnyEsxfwI3+AvOlUD7FY+VVAAAAIGNIUk0AAHolAACAgwAA9CUAAITRAABtXwAA6GwAADyLAAAbWIPnB3gAAAECSURBVHjapNK9K8UBFIfxD12im8LEYLgZjcpgUFgUCUlZTJRkMpqUxR+hDFIGhWwGwy0MFiUxSCbZ5DXiYjnqdvvpvnim0+mcZ/ieU9U6tySBNEbQjBpMoANZnGIdl4VLKcm8YCPqbgzhAT1ox1mSrFpxjtCHLdygH5tJgymlMYhhtKH+r6FishYsYBpN0dvFHu5wi9okWToC/0AmcpqM+pd7PKMRDajDNb5xlS97Qyem0BsL8IT9uOAhXpGLvL/wGXO5fFkOO7FwHvJtLOOilGALM8vE1d6xiFVlkP8aXTjAI8bKFeXLBuJ3shjFiQpIYR6zWMFaXFOlsnHM4Ng/+RkAdVE2mEeC7WYAAAAASUVORK5CYII=); background-size: 19px 13px; background-position: 0px 0px; background-repeat: no-repeat;"></span></div>
+  //
+  //
+  //
+  //
+  //
+  //
+  //     <div class="login-button login-button-form-submit" id="login-buttons-password">
+  //
+  //         Sign in
+  //
+  //     </div>
+  //
+  //
+  //
+  //         <div class="additional-link-container">
+  //           <a id="signup-link" class="additional-link">Create account</a>
+  //         </div>
+  //
+  //
+  //
+  //
+  //
+  //
+  //   </div>
+  //
+  //
+  //
+  //
+  //
+  //     </div>
+  //
+  // </div>
