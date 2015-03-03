@@ -15,6 +15,6 @@ bootstrap
 accounts-password
 benjaminrh:user-session
 http
-iron:router
 accounts-ui-unstyled
 u2622:persistent-session
+raix:ui-progress-circle

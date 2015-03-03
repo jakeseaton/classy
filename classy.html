@@ -6,85 +6,29 @@ Quincy Dewolfe 20-05
 
 <head>
   <title>Classy</title>
-  <link href = "img/new_classy_logo.png" rel = "icon"></link>
+  <link href = "img/new_classy_logo3.png" rel = "icon"></link>
 </head>
 
 <body>
-
+  {{#if Logging}}
+  {{>loginpage}}
+  {{else}}
+  {{#if currentUser}}
+      {{# if ViewingStudyCard}}
+      {{> mymenu}}
+      {{else}}
+          {{> classy_header}}
+          <div id = "wrapper">
+          <div id = "center">
+            {{>viewer}}
+          </div>
+          {{>prereqs}}
+          {{> classy_footer}}
+          </div>
+      {{/if}}
+  {{else}}
+  {{>loginpage}}
+  {{/if}}
+  {{/if}}
+{{>classy_footer}}
 </body>
-
-<template name = "home">
-<!-- CS50 ID 368f46e3019f952ebf91f5a00b780386-->
-<!-- wine thing key Xkey=jkstnx466601-->
-{{>classy_header}}
-<!-- <div id = "wrapper">
-<div id = "center">
-  {{>viewer}}
-</div>
-</div> -->
-<div id = "wrapper">
-{{>DrawerLeft}}
-<div id = "center">
-
-  {{>viewer}}
-    <!-- Browse<br> -->
-    <!-- <a href = "http://harvardlampoon.com/comp/">Reservations</a><br> -->
-    <!-- <a href = "http://hardlampoon.com/masthead">Staff</a><br> -->
-    <!-- awards<br> -->
-    <!-- <a href = "http://harvardlampoon.com/subscribe">Connect</a><br> -->
-  <!-- <div id = "display courses"> -->
-</div>
-{{> classy_footer}}
-</div>
-</template>
-
-<template name = "mycourses">
-  {{>classy_header}}
-  <div id = "wrapper">
-  <div id = "drawer">
-    <div id = "results">
-      <ul id = "search-results-table">
-        {{#each favoriteCourses}}
-          {{> course}}
-        {{/each}}
-      </ul>
-    </div>
-  </div>
-  <div id = "center">
-    {{> viewer}}
-  </div>
-  {{> classy_footer}}
-
-</div>
-
-</template >
-
-<template name = "mymenu">
-  {{>classy_header}}
-
-  <div id = "wrapper">
-    <div id = "card">
-      {{#each studyCard}}
-      <span>{{title}}<br>{{Overall}}</span><br>
-      {{/each}}
-    <div id = "print"><img src = "img/print.png"/></div>
-</div>
-  <!-- <div id = "classification">Classification</div> -->
-</div>
-  {{>classy_footer}}
-</template>
-
-
-<template name = "loginpage">
-  <div id = "login-page">
-  <a href = "/"><img src = "img/new_classy_logo.png"></a><br>
-  {{> loginButtons}}
-</div>
-  {{> classy_footer}}
-
-</template>
-
-<template name = "classy_footer">
-  <footer><br><br><div class = "whitespace invisible"></div></footer>
-
-</template>

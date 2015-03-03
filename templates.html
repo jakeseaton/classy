@@ -5,83 +5,137 @@ Quincy-Dewolfe 20-05
 -->
 
 
+
+<template name = "viewer">
+  <div id = "viewer" >
+    {{#each current}}
+    <div class = "course-info">
+{{{field}}} {{{number}}}: {{{title}}} <br>
+    <br>
+
+    <div class = "bars">
+      <div class = "bar">Overall: {{{Overall}}}</div>
+      <div class = "bar">Difficulty: {{{Difficulty}}}</div>
+      <div class = "bar">Workload: {{Workload}}</div>
+    </div>
+    <br><br>
+    <span>{{{description}}}</span><br>
+
+    <div class = "comments">
+
+      <ul class = "comment-list">
+      <li>"Be careful. Make sure you have enough time for the class and will either have friends who can help you, are a very independent learner, self starter, have guidance from {{{Suggestion.Name }}} because the class has a lot of independent learning and problem solving."</li>
+      <li> "This course will pleasantly surprise you. By the end of the semester, your relationship with {{{Suggestion.Name}}} will completely change. Most engaging and meaningful gen ed. course."</li>
+      <li> "I learned a little bit about a lot of different things"</li>
+      <li> "This class was amazing. {{{Suggestion.Name}}} is legitimately hilarious, and I learned a good amount about networks. Shop the class before you enroll though, since {{{Suggestion.Name}}} might not be for you."</li>
+
+    </ul>
+
+    </div>
+    </div>
+
+    {{/each}}
+
+</div>
+
+</template>
+
+<template name = "prereqs">
+  <div id = "right">
+  <div id = "feature-box">
+    <h2> Prerequisites</h2><br>
+    {{#each current}}
+    <img id = "wine" src = "{{Suggestion.Icon}}"><br>
+    <!-- {{{title}}} -->
+    {{{Suggestion.Name}}}<br>
+    {{{Suggestion.Description}}}<br>
+    Proof: {{{Suggestion.Proof}}}%
+    <div id = "yes">GOT IT!</div><div id = "no">NOPE</div>
+
+    {{/each}}
+    <!-- <img src = "img/redwine.png"/> -->
+    <!-- {{> progressCircle progress="75" radius="50" class="red"}} -->
+
+  </div>
+
+  </div>
+</template>
+
+<template name = "suggestion">
+  <a href = "{{Url}}"><div class = "suggestion-item" ><!--<ul class = "wine-glass">--><div class = "circle"><img src = "{{Icon}}"><i class = "invisible">{{Proof}}%</i></div><!--</ul> <b>Lecture:</b>--><br><div class = "wine-name"> {{{Name}}}<br></div></div></a>
+</template>
+
 <!-- Header -->
 <template name = "classy_header">
   <header>
-    <div class ="whitespace invisible"></div>
+    <!-- <div class ="whitespace invisible"></div> -->
+  <img class = "home" src = "img/new_classy_logo3.png"/>
+  <h1 class = "home">Browse</h1>
 
-  <!-- <h1> arvard</h1> -->
-
-  <a href = "/"> <img src = "img/new_classy_logo.png"/></a>
-  <h1> <div id = "search-bar">
-    {{>search}}
-  </div></h1>
-  <a href = "mymenu"><h1 id = "my-menus">Study Card</h1></a>
-  <a href = "/mycourses"><h1 id = "my-courses">My Courses</h1></a>
+  <h1 id = "my-menus">Study Card</h1>
   {{#if currentUser}}
-  <a href = "/login"><h1>Log Out</h1></a>
-  <!-- <h1 id = "user-greeting">Bonjour, {{currentUser.username}}</h1> -->
+  <h1 id = "logger">Log Out</h1>
   {{else}}
-  <a href = "/login"><h1>Log In</h1></a>
-  <!-- <a href = "/login"><h1 id = "login">{{> loginButtons}}</h1></a> -->
+  <h1 id = "logger">Log In</h1>
   {{/if}}
   <div class = "redspace invisible"></div>
-  <!-- {{>loginButtons}} -->
-  <!-- <h1><a>Classy</a>
-  <div class ="whitespace"></div> -->
+
   </header>
 </template>
 
-<!-- Search results  -->
+
+<template name = "mymenu">
+  {{>classy_header}}
+  <div id = "wrapper">
+    <div id = "card">
+      Study Card
+      {{#if studyCard}}
+      <table id = "studycard">
+      <tr class = "head-row"><th>Title</th><th>Overall</th><th>Prereqs</th></tr>
+      {{#each studyCard}}
+      <tr><th>{{field}}: {{number}}</th><th>{{Overall}}</th><th>{{Suggestion.Name}}</th></tr>
+      {{/each}}
+    </table>
+    {{/if}}
+
+    <!-- <div id = "print"><img src = "img/print.png"/></div> -->
+</div>
+  <!-- <div id = "classification">Classification</div> -->
+</div>
+</template>
+
+
+<template name = "loginpage">
+  <div id = "login-page">
+  <a href = "/"><img id = "logo" src = "img/new_classy_logo3.png"></a><br>
+  {{> loginButtons}}
+</div>
+  {{> classy_footer}}
+
+</template>
+
+<template name = "classy_footer">
+  {{#if currentUser}}
+  <footer><br><br><div id = "progress-bar" style = "background-color: {{color}}"> <div width = "{{percentage}}%" id = "progress-bar-inner">{{percentage}}%</div></div><img src = "{{img}}"/></footer>
+  {{else}}
+  <footer><br><br><span id = "login-reminder">MUST BE 21 OR OLDER TO LOG IN</span> </footer>
+  {{/if}}
+</template>
+
+
+<!-- Search results  NOTHING IMPORTANT BELOW -->
 <template name = "result">
   {{#each getCourses}}
     {{>course}}
   {{/each}}
-  <!-- <div class="accordion" id="accordion2">
-<div class="accordion-group">
-<div class="accordion-heading">
-<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-  Collapsible Group Item #1
-</a>
-</div>
-<div id="collapseOne" class="accordion-body collapse in">
-<div class="accordion-inner">
-  Anim pariatur cliche...
-</div>
-</div>
-</div>
-<div class="accordion-group">
-<div class="accordion-heading">
-<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-  Collapsible Group Item #2
-</a>
-</div>
-<div id="collapseTwo" class="accordion-body collapse">
-<div class="accordion-inner">
-  Anim pariatur cliche...
-</div>
-</div>
-</div>
-</div> -->
 </template>
-
 
 <!-- Individual search results -->
 <template name="course">
-  <!-- the li-text thing is doing all of the styling -->
-  <!-- {{}} also get the course number and put it at the end-->
   <li>
-
-    <!-- {{{course_number}}}<br> -->
-    <!-- <div class = "wine-match"><img src = "img/redwine.png"/>Best With:<br><a href = "yo" class = "wine-name">{{{Wine1.Name}}}</a></div> -->
-
     <div class = "course-info">{{{field}}} {{{number}}}: {{{title}}}<br><!-- <img src = "img/chef_hat.png"/>--></div>
-    <!-- <img class = "star" src = "img/add-to-list.svg"/> -->
     <img src = "img/chevron-thin-right.svg" class = "invisible">
   </li>
-  <!-- <tr class = "course-row"><th class = "left">{{{course_number}}}</th><th style = "text-align: left">{{{title}}}</th><th style = "text-align: left">{{{field}}} {{{number}}}</th><th><img class = "invisible" src = "img/chevron-thin-right.svg"/></th></tr> -->
-  <!-- What do you want to do with the {{{description}}} -->
-  <!-- spice up the display for courses here.-->
 </template>
 
 <!-- Search form -->
@@ -89,33 +143,10 @@ Quincy-Dewolfe 20-05
   <div id = "search">
   <form class ="search-form">
       <input id = "search-box" type = "text" name = "text" placeholder = "search courses" class = "search-box"/><br>
-      <!-- HAVE AN ARROW HERE THAT ONLY DISPLAYS OPTIONS WHEN OPENED.-->
-      <!-- checked = {{checked}}-->
-      <!-- <input type = "checkbox" class = "toggle-checked"/><label>First</label>
-      <input type = "checkbox" class = "toggle-checked"/><label>Second</label>
-      <input type = "checkbox" class = "toggle-checked"/><label>Third</label>
-      <input type = "checkbox" class = "toggle-checked"/><label>Fourth</label> -->
-      <!-- <input type = "checkbox" class = "toggle-checked"/><label>Wines</label> -->
-      <!-- <input type="checkbox" checked="{{hideCompleted}}">Hide finished courses</input> -->
   </form>
 </div>
 </template>
 
-<!-- Background image carousel -->
-
-
-
-
-<!-- <template name = "all_menus">
-  freshman fall
-  freshman spring
-  sophomore fall
-  sophomore spring
-  junior fall
-  junior spring
-  senior fall
-  senior spring
-</template> -->
 
 <template name = "DrawerLeft">
   <div id = "drawer">
@@ -123,101 +154,6 @@ Quincy-Dewolfe 20-05
       <ul id = "search-results-table">
         {{>result}}
       </ul>
-      <!-- <table id = "search-results-table"> -->
-        <!-- <thead> -->
-          <!-- <tr id = "head-row"><th>Course</th><th>Name</th><th>Number</th></tr> -->
-        <!-- </thead> -->
-        <!-- {{#each courses}}
-          {{> course}}
-        {{/each}} -->
-        <!-- {{>result}} -->
-      <!-- </table> -->
     </div>
   </div>
-  <!-- {{#if viewingCourses}}
-  <div class = "drawer">
-        {{#each coursesToView}}
-        {{course_number}}<br>
-        {{title}}<br>
-        {{faculty}}<br>
-        {{description}}<br>
-        {{schedule}}<br> -->
-        <!-- Save, add to menus -->
-        <!-- <img class = "star" src = "img/add-to-list.svg"/>
-        {{/each}}
-
-  </div>
-  {{/if}} -->
-
-</template>
-
-<template name = "viewer">
-  <div id = "viewer" class = "invisible">
-    {{#each coursesToView}}
-    <div class = "course-info">
-
-{{{field}}} {{{number}}}: {{{title}}} <br>
-    {{{faculty_last}}}<br>
-    {{{description}}}<br>
-
-    <div class = "suggestions">
-
-      Suggestions:<br>
-      <div class = "bars">
-        <div class = "bar">Overall: {{{Overall}}}</div>
-        <div class = "bar" >Difficulty: {{{Difficulty}}}</div>
-        <div class = "bar" >Workload: {{Workload}}</div>
-        <!--
-        <div class = "bar">Overall:<div class = "bar-inner">{{{Overall}}}</div></div>
-        <div class = "bar">Difficulty: <div class = "bar-inner">{{{Difficulty}}}</div></div>
-        <div class = "bar">Workload:<div class = "bar-inner" width="{{workload}}px">{{Workload}}</div></div> -->
-      </div>
-      {{#each current_suggestions}}
-      {{>suggestion}}
-      {{/each}}
-      <br>
-      <img class = "add" src = "img/plus.png"><img class = "star" src = "img/gold_star.png"><img id = "refresh" src = "cycle.svg"/>
-
-    </div>
-
-
-  <!-- Comments/Explanation(-> Bars) -->
-    </div>
-    <div class = "comments invisible">
-      <ul class = "comment-list">
-      <!-- Maybe replace all of the professor names with the name of the product?-->
-      <li> This course will pleasantly surprise you. By the end of the semester, your relationship with {{{Wine1.Name}}} will completely change. Most engaging and meaningful gen ed. course.</li>
-      <li> This class was amazing. Professor Kung is legitimately hilarious, and I learned a good amount about networks. Shop the class before you enroll though, since {{{Wine2.Name}}} might not be for you.</li>
-    </ul>
-      <!-- {{#each comments}}
-        Course Name<br>
-        Course Description<br>
-        Difficulty<br>
-        Workload<br>
-        Suggestions<br>
-        Midterm<br>
-        Final<br>
-        Section<br>
-        Lecture
-        Add to Menu
-        Save to Courses
-        Option to go buy all of those things
-        Cocaine alerts you to go buy it yourself
-      {{/each}} -->
-
-    </div>
-    <!-- <img height = "36px" width = "36px" class = "star" src = "img/add-to-list.svg"/> -->
-
-    {{/each}}
-
-</div>
-
-</template>
-<template name = "shop">
-  <iframe id = "shop" src = "{{shopUrl}}">
-  </iframe>
-
-</template>
-<template name = "suggestion">
-  <a href = "{{Url}}"><div class = "suggestion-item" ><!--<ul class = "wine-glass">--><div class = "circle"><img src = "{{Icon}}"><i class = "invisible">{{Proof}}%</i></div><!--</ul> <b>Lecture:</b>--><br><div class = "wine-name"> {{{Name}}}<br></div></div></a>
 </template>
