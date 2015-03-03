@@ -1,0 +1,71 @@
+
+[{
+"Name":"Bath Salts",
+"Url":"http://www.drugabuse.gov/drugs-abuse/bath-salts-synthetic-cathinones",
+"Icon":"drugs/bathsalts.png",
+"Description":"Waste your time",
+"Effects":"",
+"Proof":"100"
+},
+{
+"Name":"Cocaine",
+"Url":"http://www.drugabuse.gov/drugs-abuse/cocaine",
+"Icon":"drugs/cocaine.png",
+"Description":"Don't waste your time",
+"Effects":"",
+"Proof":"100"
+},
+{
+	"Name": "Hallucinogens",
+"Url":"http://www.drugabuse.gov/drugs-abuse/hallucinogens"
+,
+"Icon":"drugs/bathsalts.png",
+"Description":"",
+"Effects":"",
+"Proof":"100"
+},
+{
+	"Name":"Heroin",
+"Url":"http://www.drugabuse.gov/drugs-abuse/heroin"
+,
+"Icon":"drugs/heroin.png",
+"Description":"Waste your time",
+"Effects":"",
+"Proof":"100"
+},
+{
+	"Name":"Marijuana",
+"Url":"http://www.drugabuse.gov/drugs-abuse/marijuana"
+,
+"Icon":"drugs/pot.png",
+"Description":"Waste your time",
+"Effects":"",
+"Proof":"0"
+},
+{
+	"Name":"Inhalants"
+,
+"Url":"http://www.drugabuse.gov/drugs-abuse/inhalants",
+"Icon":"drugs/inhalants.png",
+"Description":"Have a good time",
+"Effects":"",
+"Proof":"100"
+},
+{
+	"Name":"Methamphetamine",
+"Url":"http://www.drugabuse.gov/drugs-abuse/methamphetamine",
+"Icon":"drugs/meth.png",
+"Description":"Waste your time",
+"Effects":"",
+"Proof":"100"
+},
+{
+	"Name":"Steroids",
+"Url":"http://www.drugabuse.gov/drugs-abuse/steroids-anabolic"
+,
+"Icon":"drugs/steroids.png",
+"Description":"Don't waste your time",
+"Effects":"",
+"Proof":"100"
+}
+]
