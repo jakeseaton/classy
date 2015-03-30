@@ -6,6 +6,7 @@
 Courses = new Mongo.Collection("courses");
 Wines = new Mongo.Collection("wines");
 Drugs = new Mongo.Collection("drugs");
+var banners = ["Nice!", "Got it!", "Careful!", "Yikes!", "Yesh!","What?","Smart!", "Look at your life", "Look at your choices"]
 // SavedCourses = new Mongo.Collection("saved");
 
 
@@ -191,6 +192,7 @@ if (Meteor.isServer){
   });
 
 }
+
 // Client code
 if (Meteor.isClient) {
 
@@ -204,13 +206,13 @@ if (Meteor.isClient) {
   Session.setDefault("percentage", 1);
   Session.setDefault("queue", []);
   Session.setDefault("seen", [])
+  Session.set("percentage", 1)
 
   Tracker.autorun(function () {
     // Meteor.subscribe("saved");
 
     // var data = SavedCourses.find({}).fetch();
     // console.log("New saved courses!", data);
-
     Meteor.subscribe("userData");
     var curr_queue = Session.get("queue")
     var curr_seen = Session.get("seen")
@@ -223,16 +225,21 @@ if (Meteor.isClient) {
         }
       }
       Session.set("queue", curr_queue)
-      console.log("worked!");
     }
     if (Meteor.user()){
       if (!Meteor.user.Yes){
         Meteor.user.Yes = []
       }
+      else{
+        var x = 0
+        for (y in Meteor.user.Yes){
+          x += Meteor.user.Yes[y].Suggestion.Proof
+        }
+        Session.set("percentage", x)
+      }
       if (!Meteor.user.No){
         Meteor.user.No = []
       }
-      console.log(Meteor.user.Yes)
     }
   });
   // search source code
@@ -251,66 +258,22 @@ if (Meteor.isClient) {
   });
 
 Template.prereqs.events({
-  "mouseenter .circle": function(e){
-    $(e.target).find("img").slideUp(function show(){
-      $(e.target).find("i").removeClass("invisible")
-    });
-  },
-  "mouseleave .circle":function(e){
-    $(e.target).find("i").addClass("invisible");
-    $(e.target).find("img").slideDown();
-  },
-  "click .suggestion-item": function(e){
-    e.preventDefault();
-    var destination = $(e.target).parents("a").attr("href");
-    Session.set("shoppingUrl", destination)
-    Router.go("/shop");
-    // $("iframe").content().append("derp")
-
-  },
   "click #no" :function next(e){
-    console.log("hi");
-    $("#viewer").fadeOut();
-    $("#feature-box").fadeOut(function callback(){
-      var curr = this
-      var queue = Session.get("queue");
-      queue.shift();
-      Session.set("queue", queue);
-       $("#viewer").fadeIn();
-       $("#feature-box").fadeIn();
-    });
+    // console.log("hi");
+    display_next(false)
+    var curr = this
   },
   "click #yes":function next(e){
-    // Meteor.call("newCourse", this, function(){
-    //   // console.log("worked");
-    //   // console.log(SavedCourses.find().fetch());
-    //
-    // });
     var curr = this
-    $("#feature-box").slideUp();
-    $(".comments").hide();
-    $("#no").hide();
-    // $(".comments").slideUp();
-    $("#viewer").slideUp(function callback(){
-      var queue = Session.get("queue");
-      // console.log(queue.length);
-      queue.shift();
-      Session.set("queue", queue);
-      var p = parseInt(Session.get("percentage"));
-      p += curr.Suggestion.Proof;
-      Session.set("percentage", p.toString());
-      $("#feature-box").fadeIn();
-      $("#viewer").fadeIn();
-    });
-
+    display_next(true)
+    var p = parseInt(Session.get("percentage"));
+    p += curr.Suggestion.Proof;
+    Session.set("percentage", p.toString());
     if (Meteor.user()){
       var Yes = Meteor.user.Yes
       Yes.push(this);
       Meteor.user.Yes = Yes
     }
-    // else{
-    //   console.log("can't add to yes beCAUSE not logged in")
-    // }
   }
 });
 
@@ -318,28 +281,8 @@ Template.viewer.helpers({
   current:function(){
     return [Session.get("queue")[0]]
   }
-});
-// Template.viewer.events({
-//   "click img":function(){
-//     console.log(this);
-//   }
-// })
 
-// Template.viewer.events({
-//   // click on add or
-//
-// });
-//
-//   Template.body.rendered = function(){
-//
-//   }
-  //
-  // Template.body.events({
-  //   "click #yes":function(){
-  //     // $("#viewer").fadeOut()
-  //   }
-  //   // also ad event listeners for when the person clicks their individual things
-  // });
+});
   Template.body.helpers({
     Browsing: function(){
       return Session.get("browsing")
@@ -410,6 +353,13 @@ Template.viewer.helpers({
       return answer
     }
   });
+  Template.mymenu.events({
+    "click #browse-link":function(){
+      Session.set("viewingStudyCard", false);
+      Session.set("logging", false)
+      Session.set("browsing", true)
+    }
+  })
 
   Template.loginpage.events({
     "click #logo":function(){
@@ -583,3 +533,57 @@ function flip(chance){
 // Template.suggestion.helpers({
 //
 // })
+function display_next(yes){
+  if (yes){
+    var rand = banners[Math.floor(Math.random() * banners.length)];
+    $("#banner").css("font-size",60)
+    // console.log(this.Suggestion.Icon)
+    // construct = "<img id = 'banner-image' src = "+this.Suggestion.Icon+">"
+    $("#banner").html(rand)
+    $("#banner").removeClass("invisible")
+    // $("#banner-image").animate({
+    //   "width":"800px",
+    //   "height": "800px",
+    // },function undo(){
+    //   $("#banner").addClass("invisible")
+    // });
+    $("#banner").animate({
+      "font-size":"200"
+    },1000,function undo(){
+      $("#banner").addClass("invisible")
+          // $(".comments").hide();
+    })
+     $("#feature-box").slideUp(function(){
+     });
+      $("#viewer").slideUp(function callback(){
+        var queue = Session.get("queue");
+        // console.log(queue.length);
+        queue.shift();
+        Session.set("queue", queue);
+        $("#viewer").fadeIn(500, function(){
+            $("#feature-box").animate({width:"toggle"})
+        });
+      });
+    }
+
+  else{
+    $("#banner").css("font-size",60)
+    $("#banner").html("NOPE!")
+    $("#banner").removeClass("invisible")
+    $("#banner").animate({
+      "font-size":"76"
+    },1000,function undo(){
+      $("#banner").addClass("invisible")
+    });
+    $("#viewer").fadeOut();
+    $("#feature-box").fadeOut(function callback(){
+      var queue = Session.get("queue");
+      queue.shift();
+      Session.set("queue", queue);
+      $("#viewer").fadeIn(500, function(){
+        $("#feature-box").animate({width:'toggle'})
+      });
+    });
+
+  }
+}

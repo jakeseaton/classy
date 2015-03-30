@@ -30,13 +30,114 @@ drawer_width = 100% - center_width
 drawer_height = 100%
 viewer_height = 480px
 prereqs_height = 480px
-
+wrapper_height = 100%
+  
+// @keyframes
 square_image()
   width arguments
   height arguments
+gradient()
+  background: -moz-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%); /* W3C */
 
+/* Sign In Page*/
+#login-sign-in-link
+  // background-color Red
+  // border-radius 15px
+  // color Red
+  // gradient()
+  &:hover
+    // background Red
+    color Blue
+    cursor pointer
+    text-decoration none
+#login-name-link
+  @extend #login-sign-in-link
+  //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
 
+#login-buttons-password
+  gradient()
+  width 10%
+  margin-left auto
+  margin-right auto
+  border-radius 5px
+  color White
+  padding 10px
+  &:hover
+    background Red
+    cursor pointer
+    text-decoration none
+#login-buttons-open-change-password
+  @extend #login-buttons-password
+#login-buttons-logout
+  @extend #login-buttons-password
+  margin-top 10px
+#signup-link
+  &:hover
+    cursor pointer
+#back-to-login-link
+  @extend #signup-link
+.login-close-text
+  @extend #signup-link
+#browse-link
+  @extend #login-buttons-password
+  width 30%
+  // background: -moz-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* FF3.6+ */
+  // background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* Chrome,Safari4+ */
+  // background: -webkit-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Chrome10+,Safari5.1+ */
+  // background: -o-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Opera 11.10+ */
+  // background: -ms-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* IE10+ */
+  // background: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%); /* W3C */
+  // width 10%
+  // margin-left auto
+  // margin-right auto
+  // border-radius 5px
+  // color White
+  // // padding 10px
+  // margin-top 10px
+  // &:hover
+  //   background Red
+  //   cursor pointer
+  //   text-decoration none
+
+#course-title
+  text-align center
+  background-color Gold
+  font Classy_font  
+  color White
+  font-size 30px
 /* Header */
+#banner
+  // background-color White
+  position absolute
+  // position absolute
+  // margin-left 50%
+  // margin-right auto
+  color Red
+  top 10%
+  font Classy_font
+  text-align center
+  width 100%
+  margin-bottom auto
+  z-index 30
+#circle
+  position absolute
+  background-color Red
+  square_image(40px)
+  border-radius 20px
+  vertical-align center
+  z-index 50
+#circle-inner
+  @extend #circle
+  position relative 
+  square_image(36px)
+  border-radius 18px
+  background-color Blue
+  // display inline-block
 
 header
   background header_background_color
@@ -186,7 +287,7 @@ body
 
 #wrapper
   width 100%
-  height 70%
+  height wrapper_height
   overflow scroll
   -webkit-transition all 2s ease /* For Safari 3.1 to 6.0 */
   transition all 2s ease
@@ -205,13 +306,16 @@ body
     margin-left auto
     margin-right auto
     display inline-block
-    height 450px
-    width 40%
+    // height 480px
+    min-height 70%
+    height 70%
+    width 50%
     left 25%
     right 25%
     top 10px
     box-shadow 1px 1px 1px Black
     border-bottom 2px solid Red
+    border-radius 10px
     &:hover
       box-shadow 2px 2px 2px Black
 
@@ -233,6 +337,13 @@ body
       img
         width 36px
         height 36px
+    #card-title
+      background-color Red
+      font Classy_font
+      font-size 20px
+      color White
+      gradient()
+
 
   #drawer
     position relative
@@ -327,7 +438,13 @@ body
       img
         width 36px
         height 36px
-
+      #course-description
+        text-align left
+        width 90%
+        margin-left auto
+        margin-right auto
+      border-radius 4px
+      position relative
       font-size 20px
       font-weight bold
       margin-top 10px
@@ -353,14 +470,19 @@ body
 
       .bars
         // text-align left
+
         display inline-block
         text-align center
         width 100%
         bottom 0
+
         margin-bottom 0
         .bar
           display inline-block
           text-align center
+          font Classy_font
+          font-size 20px
+          font-weight bold
           width 30% !important
 
       .suggestions
@@ -414,25 +536,29 @@ body
             cursor pointer
             border-bottom 1px solid Red
       .comments
+        border-top 1px solid Gold
         position absolute
-        width 80%
+        width 100%
         height 30%
         margin none
         bottom 10px
-        margin-right auto
         margin-left auto
         overflow scroll
         background-color white
         // position relative
         ul.comment-list
           list-style-type none
-          margin none
+          margin-right 25px
           position absolute
           li
             text-align left
-            border-top 1px solid Gold
-            padding-top 2px
-            padding-bottom 2px
+            border-bottom 2px solid Gold
+            // border 2px solid Gold
+            // border-left none
+            // border-right none
+            // border-bottom 1px solid Red
+            padding-top 20px
+            padding-bottom 20px
 /* Login page */
 #login-page
   top 10%
@@ -477,7 +603,8 @@ footer
     left 0
     // animations!
   #progress-bar
-    width 80%
+    max-width 80% !important
+    // width 80%
     height 60%
     line-height 100%
     top 30%
@@ -485,11 +612,16 @@ footer
     left 10%
     right 10%
     border-radius 5px
+    // gradient()
 
   #progress-bar-inner
     display inline-block
-    vertical-align middle
+    // vertical-align middle
+    vertical-align left
     text-align left
+    font Classy_font
+    font-size 20px
+    color White
     // position absolute
     // background-color Blue
     // top 20%
@@ -538,19 +670,29 @@ footer
     font-size 20px
     text-align center
     width 90%
-
+    // width 0
+    left 5%
+    // position relative
+    position absolute
+    overflow hidden
     margin-top 10px
     margin-right 10px
     height prereqs_height
-    float right
+    // float right
     border 1px solid Red
+    border-radius 4px
     box-shadow 1px 1px 1px Black
     background-color Blank
+    &:hover
+      box-shadow 2px 2px 2px Black
     h2
       margin-left auto
       margin-right auto
+      margin-top 0
+      Color White
       font Classy_font
-      font-size 20px
+      font-size 30px
+      background-color Red
       text-align center
       border-bottom 2px
 
@@ -594,30 +736,39 @@ footer
     cursor pointer
 
 #yes
+  gradient()
+  color Blank
   position absolute
   display inline-block
-  right 10% !important
+  right 10%
   margin 0
-  bottom 0
+  bottom 1%
+  border-radius 5px
   padding 10px
   &:hover
     cursor pointer
-    color Red
+    color Black
+    background Red
 #no
+  gradient()
+  color Blank
+  bottom 1%
+  border-radius 5px
   position absolute
   display inline-block
   margin 0
   left 10%
-  bottom 0
   padding 10px
   &:hover
+    background Red
     cursor pointer
-    color Red
+    color Black
+    background-color Red
 #studycard
   width 90%
-  font-size 10px !important
+  // font-size 10px !important
+  font-size 10px !imporatnt
   text-align left
-
   padding 5px
   border Black
   position absolute
@@ -631,11 +782,18 @@ footer
   padding-left 5%
   padding-right 5%
   th
-    padding-right 10px
+    border-top 1px solid Gold
+    padding-right 20px
+    padding-top 10px
   tr
     width 10px
-    padding
-    .head-row
-      color White
+  .head-row
+    border-bottom 2px solid Red
+    font Classy_font
+    font-size 30px
+    th 
+      border-top none !important
+      padding-top 20px
+    // color Gold
 .login-button:hover
   cursor pointer

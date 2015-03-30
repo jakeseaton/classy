@@ -10,16 +10,15 @@ Quincy-Dewolfe 20-05
   <div id = "viewer" >
     {{#each current}}
     <div class = "course-info">
-{{{field}}} {{{number}}}: {{{title}}} <br>
-    <br>
+<div id = "course-title">{{{field}}} {{{number}}}: {{{title}}}</div> <br>
 
     <div class = "bars">
       <div class = "bar">Overall: {{{Overall}}}</div>
       <div class = "bar">Difficulty: {{{Difficulty}}}</div>
       <div class = "bar">Workload: {{Workload}}</div>
     </div>
-    <br><br>
-    <span>{{{description}}}</span><br>
+    <br>
+    <div id = "course-description">{{{description}}}</div><br>
 
     <div class = "comments">
 
@@ -45,7 +44,7 @@ Quincy-Dewolfe 20-05
   <div id = "feature-box">
     <h2> Prerequisites</h2><br>
     {{#each current}}
-    <img id = "wine" src = "{{Suggestion.Icon}}"><br>
+    <a href = "{{Suggestion.Url}}"><img id = "wine" src = "{{Suggestion.Icon}}"></a><br>
     <!-- {{{title}}} -->
     {{{Suggestion.Name}}}<br>
     {{{Suggestion.Description}}}<br>
@@ -54,7 +53,7 @@ Quincy-Dewolfe 20-05
 
     {{/each}}
     <!-- <img src = "img/redwine.png"/> -->
-    <!-- {{> progressCircle progress="75" radius="50" class="red"}} -->
+
 
   </div>
 
@@ -88,14 +87,22 @@ Quincy-Dewolfe 20-05
   {{>classy_header}}
   <div id = "wrapper">
     <div id = "card">
-      Study Card
+      <div id = "card-title">Study Card</div>
       {{#if studyCard}}
       <table id = "studycard">
       <tr class = "head-row"><th>Title</th><th>Overall</th><th>Prereqs</th></tr>
       {{#each studyCard}}
-      <tr><th>{{field}}: {{number}}</th><th>{{Overall}}</th><th>{{Suggestion.Name}}</th></tr>
+      <tr><th>{{field}}: {{number}}</th><th><img width = "20px" height = "20px" src = "{{Suggestion.Icon}}"> {{Overall}}</th><th>{{Suggestion.Name}}</th></tr>
       {{/each}}
-    </table>
+      </table>
+      {{else}}
+      <br>
+      <br>
+      <br>
+      You don't have any classes yet!
+      <br>
+      <br>
+      <div id = "browse-link">Browse!</div>
     {{/if}}
 
     <!-- <div id = "print"><img src = "img/print.png"/></div> -->
@@ -116,7 +123,7 @@ Quincy-Dewolfe 20-05
 
 <template name = "classy_footer">
   {{#if currentUser}}
-  <footer><br><br><div id = "progress-bar" style = "background-color: {{color}}"> <div width = "{{percentage}}%" id = "progress-bar-inner">{{percentage}}%</div></div><img src = "{{img}}"/></footer>
+  <footer><br><br><div id = "progress-bar" style = "background-color: {{color}}; width: {{percentage}}%"> <div id = "progress-bar-inner">{{percentage}}%</div></div><img src = "{{img}}"/></footer>
   {{else}}
   <footer><br><br><span id = "login-reminder">MUST BE 21 OR OLDER TO LOG IN</span> </footer>
   {{/if}}
@@ -156,4 +163,7 @@ Quincy-Dewolfe 20-05
       </ul>
     </div>
   </div>
+</template>
+<template name = "Banner">
+  <div id = "banner" class = "invisible">GOT IT!</div>
 </template>

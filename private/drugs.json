@@ -3,7 +3,7 @@
 "Name":"Bath Salts",
 "Url":"http://www.drugabuse.gov/drugs-abuse/bath-salts-synthetic-cathinones",
 "Icon":"drugs/bathsalts.png",
-"Description":"Waste your time",
+"Description":"Don't waste your time with alcohol",
 "Effects":"",
 "Proof":"100"
 },
@@ -11,7 +11,7 @@
 "Name":"Cocaine",
 "Url":"http://www.drugabuse.gov/drugs-abuse/cocaine",
 "Icon":"drugs/cocaine.png",
-"Description":"Don't waste your time",
+"Description":"Don't waste your time with alcohol",
 "Effects":"",
 "Proof":"100"
 },
@@ -20,7 +20,7 @@
 "Url":"http://www.drugabuse.gov/drugs-abuse/hallucinogens"
 ,
 "Icon":"drugs/bathsalts.png",
-"Description":"",
+"Description":"Don't waste your time with alcohol",
 "Effects":"",
 "Proof":"100"
 },
@@ -29,7 +29,7 @@
 "Url":"http://www.drugabuse.gov/drugs-abuse/heroin"
 ,
 "Icon":"drugs/heroin.png",
-"Description":"Waste your time",
+"Description":"Don't waste your time with alcohol",
 "Effects":"",
 "Proof":"100"
 },
@@ -38,7 +38,7 @@
 "Url":"http://www.drugabuse.gov/drugs-abuse/marijuana"
 ,
 "Icon":"drugs/pot.png",
-"Description":"Waste your time",
+"Description":"Don't waste your time with alcohol",
 "Effects":"",
 "Proof":"0"
 },
@@ -47,7 +47,7 @@
 ,
 "Url":"http://www.drugabuse.gov/drugs-abuse/inhalants",
 "Icon":"drugs/inhalants.png",
-"Description":"Have a good time",
+"Description":"Don't waste your time with alcohol",
 "Effects":"",
 "Proof":"100"
 },
@@ -55,7 +55,7 @@
 	"Name":"Methamphetamine",
 "Url":"http://www.drugabuse.gov/drugs-abuse/methamphetamine",
 "Icon":"drugs/meth.png",
-"Description":"Waste your time",
+"Description":"Don't waste your time with alcohol",
 "Effects":"",
 "Proof":"100"
 },
@@ -64,7 +64,7 @@
 "Url":"http://www.drugabuse.gov/drugs-abuse/steroids-anabolic"
 ,
 "Icon":"drugs/steroids.png",
-"Description":"Don't waste your time",
+"Description":"Don't waste your time with alcohol",
 "Effects":"",
 "Proof":"100"
 }
