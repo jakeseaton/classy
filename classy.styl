@@ -102,8 +102,11 @@ gradient()
   // &:hover
   //   background Red
   //   cursor pointer
+ 
   //   text-decoration none
-
+b
+	font Classy_font
+	font-size 20px
 #course-title
   text-align center
   background-color Gold
@@ -140,13 +143,15 @@ gradient()
   // display inline-block
 
 header
+  text-align center
   background header_background_color
   // background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
   // padding 20px 15px 15px 15px
   //position relative
   //margin-top 0
   width 100%
-  max-height 10%
+  // max-height 10%
+  height 50%
 
   img
     width 8%
@@ -164,7 +169,7 @@ header
     color White
     background-color header_background_color
     font Classy_font
-    font-size 30px
+    font-size 20px
     // margin 0
     // margin-bottom 10px
     display inline-block
@@ -172,11 +177,33 @@ header
     margin-left 20px
     margin-bottom 0px
     margin-top 20px
-    box-shadow 1px 1px 1px Black
+    // box-shadow 1px 1px 1px Black
     // margin-right: 1em;
     &:hover
       color Red
       cursor pointer
+  #progress-bar
+  	display inline block
+  	margin-left auto
+  	margin-right auto
+  	height 50%
+    max-width 80% !important
+   //  // width 80%
+   //  // height 60%
+   //  line-height 100%
+   //  top 30%
+   //  // position absolute
+   //  left 10%
+   //  right 10%
+    border-radius 5px
+  #progress-bar-inner
+    // display inline-block
+    // // vertical-align middle
+    // vertical-align left
+    // text-align left
+    font Classy_font
+    font-size 20px
+    color White
 
   #login
     float right
@@ -657,7 +684,8 @@ footer
 /* Login Buttons */
 #login-buttons
   .login-link-text
-    font Classy_font
+    font-family Text_font_family
+    // change this to change the size of the name
 
 #right
   width 40%
@@ -797,3 +825,9 @@ footer
     // color Gold
 .login-button:hover
   cursor pointer
+.classy-font
+  font-family Text_font_family
+  font-size 30px
+  color Red
+.regular-font
+  font-family Text_font_family

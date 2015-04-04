@@ -23,10 +23,13 @@ Quincy-Dewolfe 20-05
     <div class = "comments">
 
       <ul class = "comment-list">
-      <li>"Be careful. Make sure you have enough time for the class and will either have friends who can help you, are a very independent learner, self starter, have guidance from {{{Suggestion.Name }}} because the class has a lot of independent learning and problem solving."</li>
-      <li> "This course will pleasantly surprise you. By the end of the semester, your relationship with {{{Suggestion.Name}}} will completely change. Most engaging and meaningful gen ed. course."</li>
+      <li>Comments</li>
+      <li>Be prepared to work hard.  This class takes a great deal of commitment and work. When you get to the end, you will feel accomplished and proud, but it will take a lot of <b>{{{Suggestion.Name}}}</b> to get there. It is doable, but incredibly challenging. (Note: I had little to no experience at the start.)</li>
+      <!-- <li>"Be careful. Make sure you have enough time for the class and will either have friends who can help you, are a very independent learner, self starter, have guidance from {{{Suggestion.Name }}} because the class has a lot of independent learning and problem solving."</li> -->
+      <li>Find <b>{{{Suggestion.Name}}}</b> to help you outside of office hours. Saved my life. Good class, will teach you programming like teaching language by starting with cave languages.</li>
+      <li> "This course will pleasantly surprise you. By the end of the semester, your relationship with <b>{{{Suggestion.Name}}}</b> will completely change. Most engaging and meaningful gen ed. course."</li>
       <li> "I learned a little bit about a lot of different things"</li>
-      <li> "This class was amazing. {{{Suggestion.Name}}} is legitimately hilarious, and I learned a good amount about networks. Shop the class before you enroll though, since {{{Suggestion.Name}}} might not be for you."</li>
+      <li> "This class was amazing. <b>{{{Suggestion.Name}}}</b> is legitimately hilarious, and I learned a good amount about networks. Shop the class before you enroll though, since <b>{{{Suggestion.Name}}}</b> might not be for you."</li>
 
     </ul>
 
@@ -42,11 +45,11 @@ Quincy-Dewolfe 20-05
 <template name = "prereqs">
   <div id = "right">
   <div id = "feature-box">
-    <h2> Prerequisites</h2><br>
+    <h2> You'll Need...</h2><br>
     {{#each current}}
+    {{{Suggestion.Name}}}<br>
     <a href = "{{Suggestion.Url}}"><img id = "wine" src = "{{Suggestion.Icon}}"></a><br>
     <!-- {{{title}}} -->
-    {{{Suggestion.Name}}}<br>
     {{{Suggestion.Description}}}<br>
     Proof: {{{Suggestion.Proof}}}%
     <div id = "yes">GOT IT!</div><div id = "no">NOPE</div>
@@ -68,16 +71,18 @@ Quincy-Dewolfe 20-05
 <template name = "classy_header">
   <header>
     <!-- <div class ="whitespace invisible"></div> -->
-  <img class = "home" src = "img/new_classy_logo3.png"/>
-  <h1 class = "home">Browse</h1>
+    <h1 id = "my-menus">Study Card</h1>
+    <img class = "home" src = "img/new_classy_logo3.png"/>
+    {{#if currentUser}}
+    <h1 id = "logger">Log Out</h1>
+    {{else}}
+    <h1 id = "logger">Log In</h1>
+    {{/if}}
+  <!-- <br><h1> Drunk-o-meter</h1><br> -->
+  <!-- <h1 class = "home">Browse</h1> -->
+  <div id = "progress-bar" style = "background-color: {{color}}; width: {{percentage}}%"> <div id = "progress-bar-inner">{{message}}</div></div>
 
-  <h1 id = "my-menus">Study Card</h1>
-  {{#if currentUser}}
-  <h1 id = "logger">Log Out</h1>
-  {{else}}
-  <h1 id = "logger">Log In</h1>
-  {{/if}}
-  <div class = "redspace invisible"></div>
+  <!-- <div class = "redspace invisible"></div> -->
 
   </header>
 </template>
@@ -90,7 +95,7 @@ Quincy-Dewolfe 20-05
       <div id = "card-title">Study Card</div>
       {{#if studyCard}}
       <table id = "studycard">
-      <tr class = "head-row"><th>Title</th><th>Overall</th><th>Prereqs</th></tr>
+      <tr class = "head-row"><th>Title</th><th>Overall</th><th>You'll Need...</th></tr>
       {{#each studyCard}}
       <tr><th>{{field}}: {{number}}</th><th><img width = "20px" height = "20px" src = "{{Suggestion.Icon}}"> {{Overall}}</th><th>{{Suggestion.Name}}</th></tr>
       {{/each}}
@@ -114,7 +119,10 @@ Quincy-Dewolfe 20-05
 
 <template name = "loginpage">
   <div id = "login-page">
+
   <a href = "/"><img id = "logo" src = "img/new_classy_logo3.png"></a><br>
+  <div class =  "classy-font">Classy</div>
+  <div class = "regular-font">Shop for fine courses and wine</div>
   {{> loginButtons}}
 </div>
   {{> classy_footer}}

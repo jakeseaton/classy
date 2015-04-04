@@ -206,7 +206,7 @@ if (Meteor.isClient) {
   Session.setDefault("percentage", 1);
   Session.setDefault("queue", []);
   Session.setDefault("seen", [])
-  Session.set("percentage", 1)
+  Session.set("percentage", 15)
 
   Tracker.autorun(function () {
     // Meteor.subscribe("saved");
@@ -231,11 +231,11 @@ if (Meteor.isClient) {
         Meteor.user.Yes = []
       }
       else{
-        var x = 0
-        for (y in Meteor.user.Yes){
-          x += Meteor.user.Yes[y].Suggestion.Proof
-        }
-        Session.set("percentage", x)
+        // var x = 0
+        // for (y in Meteor.user.Yes){
+        //   x += Meteor.user.Yes[y].Suggestion.Proof
+        // }
+        // Session.set("percentage", Math.max(x,15))
       }
       if (!Meteor.user.No){
         Meteor.user.No = []
@@ -256,7 +256,50 @@ if (Meteor.isClient) {
       return [Session.get("queue")[0]]
     }
   });
+Template.classy_header.helpers({
+  color:function(){
+    var p = parseInt(Session.get("percentage"));
+    if (p < 50){
+      return "#90A4AE"
+    }
+    else if (p > 100){
+      return "#EA212E"
+    }
+    else{
+      return "#BC9D52"
+    }
+  },
+  percentage:function(){
+    var p = Session.get("percentage");
+    return p
+  },
+  message:function(){
+    return "Drunk-o'-Meter"
+    // var p = Session.get("percentage")
+    // if (p < 50){
+    //   return "Sober"
+    // }
+    // else if  (p>100){
+    //   return "Danger!"
+    // }
+    // else{
+    //   return "Careful"
+    // }
+  },
+  img:function(){
+    var p = Session.get("percentage");
+    if (p < 50){
+      return "img/yes.png"
+    }
+    else if (p > 100){
+      return "drugs/meth.png"
+    }
+    else{
+      return "img/no.png"
+    }
+  }
 
+});
 Template.prereqs.events({
   "click #no" :function next(e){
     // console.log("hi");
@@ -268,7 +311,7 @@ Template.prereqs.events({
     display_next(true)
     var p = parseInt(Session.get("percentage"));
     p += curr.Suggestion.Proof;
-    Session.set("percentage", p.toString());
+    Session.set("percentage", Math.max(p,15).toString());
     if (Meteor.user()){
       var Yes = Meteor.user.Yes
       Yes.push(this);
