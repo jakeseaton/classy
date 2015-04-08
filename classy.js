@@ -6,7 +6,7 @@
 Courses = new Mongo.Collection("courses");
 Wines = new Mongo.Collection("wines");
 Drugs = new Mongo.Collection("drugs");
-var banners = ["Nice!", "Got it!", "Careful!", "Yikes!", "Yesh!","What?","Smart!", "Look at your life", "Look at your choices"]
+var banners = ["Got it!"]//["Nice!", "Got it!", "Careful!", "Yikes!", "Yesh!","What?","Smart!", "Look at your life", "Look at your choices"]
 // SavedCourses = new Mongo.Collection("saved");
 
 
