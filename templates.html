@@ -4,12 +4,13 @@ Developed using Meteor by Jake Seaton
 Quincy-Dewolfe 20-05
 -->
 
-
-
 <template name = "viewer">
   <div id = "viewer" >
+
     {{#each current}}
     <div class = "course-info">
+      <div id = "yes">GOT IT!</div><div id = "no">NOPE</div>
+
 <div id = "course-title">{{{field}}} {{{number}}}: {{{title}}}</div> <br>
 
     <div class = "bars">
@@ -18,26 +19,43 @@ Quincy-Dewolfe 20-05
       <div class = "bar">Workload: {{Workload}}</div>
     </div>
     <br>
-    <div id = "course-description">{{{description}}}</div><br>
+    <!-- <div id = "course-description">{{{description}}}</div><br> -->
+    <nav>
+      <ul class="nav nav-tabs nav-justified">
+        <li role="presentation" class="active"><a href="#suggestion-section" aria-controls = "suggestion-section" role = "tab" data-toggle = "tab">Suggestion</a></li>
+        <li role="presentation"><a href="#description-section" aria-controls="description-section" role="tab" data-toggle="tab">Description</a></li>
+        <li role="presentation"><a href="#comments-section" aria-controls="comments-section" role="tab" data-toggle="tab">Comments</a></li>
+      </ul>
+    </nav>
+    <div class = "tab-content">
+      <div role="tabpanel" class="tab-pane active" id = "suggestion-section">
+        HERP DERP
+      </div>
+      <div role="tabpanel" class="tab-pane" id = "description-section">
 
-    <div class = "comments">
+          <div id = "course-description">{{{description}}}</div>
 
-      <ul class = "comment-list">
-      <li><b>Comments</b></li>
-      <li>Be prepared to work hard.  This class takes a great deal of commitment and work. When you get to the end, you will feel accomplished and proud, but it will take a lot of <b>{{{Suggestion.Name}}}</b> to get there. It is doable, but incredibly challenging. (Note: I had little to no experience at the start.)</li>
-      <!-- <li>"Be careful. Make sure you have enough time for the class and will either have friends who can help you, are a very independent learner, self starter, have guidance from {{{Suggestion.Name }}} because the class has a lot of independent learning and problem solving."</li> -->
-      <li>Find <b>{{{Suggestion.Name}}}</b> to help you outside of office hours. Saved my life. Good class, will teach you programming like teaching language by starting with cave languages.</li>
-      <li> "This course will pleasantly surprise you. By the end of the semester, your relationship with <b>{{{Suggestion.Name}}}</b> will completely change. Most engaging and meaningful gen ed. course."</li>
-      <li> "I learned a little bit about a lot of different things"</li>
-      <li> "This class was amazing. <b>{{{Suggestion.Name}}}</b> is legitimately hilarious, and I learned a good amount about networks. Shop the class before you enroll though, since <b>{{{Suggestion.Name}}}</b> might not be for you."</li>
+        </div>
+        <div role="tabpanel" class="tab-pane" id = "comments-section">
+          <div class = "comments">
 
-    </ul>
+            <ul class = "comment-list">
+            <li><b>Comments</b></li>
+            <li>Be prepared to work hard.  This class takes a great deal of commitment and work. When you get to the end, you will feel accomplished and proud, but it will take a lot of <b>{{{Suggestion.Name}}}</b> to get there. It is doable, but incredibly challenging. (Note: I had little to no experience at the start.)</li>
+            <!-- <li>"Be careful. Make sure you have enough time for the class and will either have friends who can help you, are a very independent learner, self starter, have guidance from {{{Suggestion.Name }}} because the class has a lot of independent learning and problem solving."</li> -->
+            <li>Find <b>{{{Suggestion.Name}}}</b> to help you outside of office hours. Saved my life. Good class, will teach you programming like teaching language by starting with cave languages.</li>
+            <li> "This course will pleasantly surprise you. By the end of the semester, your relationship with <b>{{{Suggestion.Name}}}</b> will completely change. Most engaging and meaningful gen ed. course."</li>
+            <li> "I learned a little bit about a lot of different things"</li>
+            <li> "This class was amazing. <b>{{{Suggestion.Name}}}</b> is legitimately hilarious, and I learned a good amount about networks. Shop the class before you enroll though, since <b>{{{Suggestion.Name}}}</b> might not be for you."</li>
 
+          </ul>
+
+          </div>        </div>
     </div>
+
     </div>
 
     {{/each}}
-
 </div>
 
 </template>
@@ -56,10 +74,7 @@ Quincy-Dewolfe 20-05
 
     {{/each}}
     <!-- <img src = "img/redwine.png"/> -->
-
-
   </div>
-
   </div>
 </template>
 
@@ -97,7 +112,7 @@ Quincy-Dewolfe 20-05
       <table id = "studycard">
       <tr class = "head-row"><th>Title</th><th>Overall</th><th>You'll Need...</th></tr>
       {{#each studyCard}}
-      <tr><th>{{field}}: {{number}}</th><th><img width = "20px" height = "20px" src = "{{Suggestion.Icon}}"> {{Overall}}</th><th>{{Suggestion.Name}}</th></tr>
+      <tr><th>{{field}}: {{number}}</th><th><img src = "{{Suggestion.Icon}}"> {{Overall}}</th><th>{{Suggestion.Name}}</th></tr>
       {{/each}}
       </table>
       {{else}}
@@ -163,15 +178,33 @@ Quincy-Dewolfe 20-05
 </template>
 
 
-<template name = "DrawerLeft">
-  <div id = "drawer">
-    <div id = "results">
-      <ul id = "search-results-table">
-        {{>result}}
-      </ul>
-    </div>
-  </div>
-</template>
+
+
 <template name = "Banner">
   <div id = "banner" class = "invisible">GOT IT!</div>
+</template>
+
+<template name = "homeStudyCard">
+  <div id = "right">
+    <div id = "feature-box">
+    <div id = "card-title">Study Card</div>
+    {{#if studyCard}}
+    <table id = "studycard">
+    <tr class = "head-row"><th>Title</th><th>Overall</th><th>You'll Need...</th></tr>
+    {{#each studyCard}}
+    <tr><th>{{field}}: {{number}}</th><th><img src = "{{Suggestion.Icon}}"> {{Overall}}</th><th>{{Suggestion.Name}}</th></tr>
+    {{/each}}
+    </table>
+    {{else}}
+    <br>
+    <br>
+    <br>
+    You don't have any classes yet!
+    <br>
+    <br>
+  {{/if}}
+</div>
+
+  <!-- <div id = "print"><img src = "img/print.png"/></div> -->
+</div>
 </template>

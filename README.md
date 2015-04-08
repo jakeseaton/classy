@@ -26,7 +26,7 @@ Each course is paired with a wine from the database. As courses become more diff
 The user is given the opption to take the course by stating that they have the prerequisites. If they accept the course, the course and product slide up toward the menu bar and study card button. The "GOT IT!" button lingers, and the counter at the bottom increments, tracking the cumulative proof of the user's study card. Otherwise, both course and wine fade out.
 
 Known Issues:
---The study card is not persistent
+--The study card is NOW persistent
   -- this is because the favorited courses are being stored in the user database. The solution is to create a new databse that pairs the user's id's to an array containing all of the courses they have favorited, and then publishing the data specific to the current user to the client using Meteor.publish.
 --Meteor's login functionality is occasionally wonky, particularly on mobile
 --Very rarely, the image for the coruse does not show up.

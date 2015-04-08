@@ -31,7 +31,7 @@ drawer_height = 100%
 viewer_height = 480px
 prereqs_height = 480px
 wrapper_height = 100%
-  
+
 // @keyframes
 square_image()
   width arguments
@@ -43,6 +43,25 @@ gradient()
   background: -o-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* IE10+ */
   background: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%); /* W3C */
+
+classyFontOfSize()
+  font Classy_font
+  font-size arguments
+
+textFontOfSize()
+  font Text_font_family
+  font-size arguments
+
+redButtons()
+  gradient()
+  border-radius 5px
+  color White
+  z-index 30
+redButtonsHover()
+  background Red
+  color Black
+  cursor pointer
+
 
 /* Sign In Page*/
 #login-sign-in-link
@@ -60,17 +79,14 @@ gradient()
   //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
 
 #login-buttons-password
-  gradient()
+  redButtons()
   width 10%
   margin-left auto
   margin-right auto
   border-radius 5px
-  color White
   padding 10px
   &:hover
-    background Red
-    cursor pointer
-    text-decoration none
+    redButtonsHover()
 #login-buttons-open-change-password
   @extend #login-buttons-password
 #login-buttons-logout
@@ -86,33 +102,12 @@ gradient()
 #browse-link
   @extend #login-buttons-password
   width 30%
-  // background: -moz-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* FF3.6+ */
-  // background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* Chrome,Safari4+ */
-  // background: -webkit-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Chrome10+,Safari5.1+ */
-  // background: -o-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Opera 11.10+ */
-  // background: -ms-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* IE10+ */
-  // background: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%); /* W3C */
-  // width 10%
-  // margin-left auto
-  // margin-right auto
-  // border-radius 5px
-  // color White
-  // // padding 10px
-  // margin-top 10px
-  // &:hover
-  //   background Red
-  //   cursor pointer
- 
-  //   text-decoration none
-// b
-// 	font Classy_font
-// 	font-size 20px
+
 #course-title
   text-align center
   background-color Gold
-  font Classy_font  
+  classyFontOfSize(30px)
   color White
-  font-size 30px
 /* Header */
 #banner
   // background-color White
@@ -136,7 +131,7 @@ gradient()
   z-index 50
 #circle-inner
   @extend #circle
-  position relative 
+  position relative
   square_image(36px)
   border-radius 18px
   background-color Blue
@@ -240,8 +235,7 @@ header
         // font Classy_font
         // .toggle-checked
         label
-          font Classy_font
-          font-size 20px
+          classyFontOfSize(20px)
           display inline-block
         .search-box
           margin-bottom 0
@@ -368,12 +362,42 @@ body
         height 36px
     #card-title
       background-color Red
-      font Classy_font
-      font-size 20px
+      classyFontOfSize(20px)
       color White
       gradient()
-
-
+    #studycard
+      width 90%
+      // font-size 10px !important
+      font-size 10px !imporatnt
+      text-align left
+      padding 5px
+      border Black
+      position absolute
+      top 0
+      // height 100%
+      z-index 30
+      margin-top 5%
+      margin-left auto
+      margin-right auto
+      display inherit
+      padding-left 5%
+      padding-right 5%
+      th
+        border-top 1px solid Gold
+        padding-right 20px
+        padding-top 10px
+        img
+          square_image(20px)
+          margin 0px !important
+      tr
+        width 10px
+      .head-row
+        border-bottom 2px solid Red
+        font Classy_font
+        font-size 30px !important
+        th
+          border-top none !important
+          padding-top 20px
   #drawer
     position relative
     overflow scroll !important
@@ -709,7 +733,7 @@ footer
     left 5%
     // position relative
     position absolute
-    overflow hidden
+    overflow auto
     margin-top 10px
     margin-right 10px
     height prereqs_height
@@ -744,97 +768,103 @@ footer
       color White
       width 10%
       left 0
-.no
-  // float left
-  position absolute
-  bottom 0
-  left 10%
-  z-index 20
-  display inline-block
-  height 36px !important
-  width 36px !important
+    #card-title
+      background-color Red
+      font Classy_font
+      font-size 20px
+      color White
+      gradient()
+    #studycard
+      width 90%
+      font-size 10px !imporatnt
+      text-align left
+      padding 5px
+      border Black
+      position absolute
+      top 0
+      // height 100%
+      z-index 30
+      margin-top 5%
+      margin-left auto
+      margin-right auto
+      display inherit
+      padding-left 5%
+      padding-right 5%
+      th
+        border-top 1px solid Gold
+        padding-right 15px
+        padding-top 10px
+        font-size 8px
+        img
+          square_image(20px)
+          margin 0px !important
+      tr
+        width 10px
+      .head-row
+        border-bottom 2px solid Red
+        font Classy_font
+        th
+          border-top none !important
+          padding-top 20px
+          font-size 25px
 
-  &:hover
-    cursor pointer
-.yes
-  position absolute
-  float right
-  display inline-block
-  height 36px !important
-  width 36px !important
-  right 10%
-  z-index 20
-  bottom 0
-  // float left
-  // margin-left 10px
-  &:hover
-    cursor pointer
+//
+// .no
+//   // float left
+//   position absolute
+//   bottom 0
+//   left 10%
+//   z-index 20
+//   display inline-block
+//   height 36px !important
+//   width 36px !important
+//
+//   &:hover
+//     cursor pointer
+// .yes
+//   position absolute
+//   float right
+//   display inline-block
+//   height 36px !important
+//   width 36px !important
+//   right 10%
+//   z-index 20
+//   bottom 0
+//   // float left
+//   // margin-left 10px
+//   &:hover
+//     cursor pointer
 
 #yes
-  gradient()
-  color Blank
+  redButtons()
   position absolute
   display inline-block
   right 10%
   margin 0
   bottom 1%
-  border-radius 5px
   padding 10px
   &:hover
-    cursor pointer
-    color Black
-    background Red
+    onsHover()
+
 #no
-  gradient()
-  color Blank
+  redButtons()
   bottom 1%
   border-radius 5px
   position absolute
-  display inline-block
   margin 0
   left 10%
   padding 10px
   &:hover
-    background Red
-    cursor pointer
-    color Black
-    background-color Red
-#studycard
-  width 90%
-  // font-size 10px !important
-  font-size 10px !imporatnt
-  text-align left
-  padding 5px
-  border Black
-  position absolute
-  top 0
-  // height 100%
-  z-index 30
-  margin-top 5%
-  margin-left auto
-  margin-right auto
-  display inherit
-  padding-left 5%
-  padding-right 5%
-  th
-    border-top 1px solid Gold
-    padding-right 20px
-    padding-top 10px
-  tr
-    width 10px
-  .head-row
-    border-bottom 2px solid Red
-    font Classy_font
-    font-size 30px
-    th 
-      border-top none !important
-      padding-top 20px
+    redButtonsHover()
+
+
     // color Gold
 .login-button:hover
   cursor pointer
+
 .classy-font
-  font-family Text_font_family
-  font-size 30px
+  textFontOfSize(30px)
   color Red
+
 .regular-font
   font-family Text_font_family
