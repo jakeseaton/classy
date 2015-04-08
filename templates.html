@@ -12,27 +12,40 @@ Quincy-Dewolfe 20-05
       <div id = "yes">GOT IT!</div><div id = "no">NOPE</div>
 
 <div id = "course-title">{{{field}}} {{{number}}}: {{{title}}}</div> <br>
-
+<!--
     <div class = "bars">
       <div class = "bar">Overall: {{{Overall}}}</div>
       <div class = "bar">Difficulty: {{{Difficulty}}}</div>
       <div class = "bar">Workload: {{Workload}}</div>
     </div>
-    <br>
+    <br> -->
     <!-- <div id = "course-description">{{{description}}}</div><br> -->
-    <nav>
-      <ul class="nav nav-tabs nav-justified">
-        <li role="presentation" class="active"><a href="#suggestion-section" aria-controls = "suggestion-section" role = "tab" data-toggle = "tab">Suggestion</a></li>
-        <li role="presentation"><a href="#description-section" aria-controls="description-section" role="tab" data-toggle="tab">Description</a></li>
-        <li role="presentation"><a href="#comments-section" aria-controls="comments-section" role="tab" data-toggle="tab">Comments</a></li>
-      </ul>
-    </nav>
+
     <div class = "tab-content">
       <div role="tabpanel" class="tab-pane active" id = "suggestion-section">
-        HERP DERP
+        <div class = "bars">
+          <div class = "bar">Overall: {{{Overall}}}</div>
+          <div class = "bar">Difficulty: {{{Difficulty}}}</div>
+          <div class = "bar">Workload: {{Workload}}</div>
+        </div>
+        <br>
+        <br>
+        {{{Suggestion.Name}}}<br>
+        <a href = "{{Suggestion.Url}}"><img id = "wine" src = "{{Suggestion.Icon}}"></a><br>
+        <!-- {{{title}}} -->
+        {{{Suggestion.Description}}}<br>
+        Proof: {{{Suggestion.Proof}}}%
+        <div id = "yes">GOT IT!</div><div id = "no">NOPE</div>
       </div>
       <div role="tabpanel" class="tab-pane" id = "description-section">
 
+            <div class = "bars">
+              <div class = "bar">Overall: {{{Overall}}}</div>
+              <div class = "bar">Difficulty: {{{Difficulty}}}</div>
+              <div class = "bar">Workload: {{Workload}}</div>
+            </div>
+            <br>
+            <br>
           <div id = "course-description">{{{description}}}</div>
 
         </div>
@@ -52,7 +65,13 @@ Quincy-Dewolfe 20-05
 
           </div>        </div>
     </div>
-
+    <nav>
+      <ul class="nav nav-tabs nav-justified">
+        <li role="presentation" class="active"><a href="#suggestion-section" aria-controls = "suggestion-section" role = "tab" data-toggle = "tab">Suggestion</a></li>
+        <li role="presentation"><a href="#description-section" aria-controls="description-section" role="tab" data-toggle="tab">Description</a></li>
+        <li role="presentation"><a href="#comments-section" aria-controls="comments-section" role="tab" data-toggle="tab">Comments</a></li>
+      </ul>
+    </nav>
     </div>
 
     {{/each}}
