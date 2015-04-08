@@ -16,24 +16,20 @@ if (Meteor.isServer){
 
   // insert into wines database
   if (Wines.find().count() ===0){
-    // import red wines
-    // console.log("importing redwines.json to db")
+
     var output = JSON.parse(Assets.getText("redwine.json"));
     var redwines = output.Products.List
-    //console.log(wines);
     for (wine in redwines){
       var curr = redwines[wine]
       var proof = Math.floor((Math.random()*10)+10);
       curr.Proof = proof;
       curr.Color = "red";
       curr.Icon = "img/redwine.png"
-      // console.log(curr.Name)
       Wines.insert(curr)
     }
 
     // import white wines
     output = JSON.parse(Assets.getText("whitewines.json"));
-    // console.log("importing whitewines.json to db")
     var whitewines = output.Products.List;
     for (wine in whitewines){
       var curr = whitewines[wine]
@@ -41,7 +37,7 @@ if (Meteor.isServer){
       curr.Proof = proof;
       curr.Color = "white";
       curr.Icon = "img/whitewine.png"
-      // console.log(curr);
+
       Wines.insert(curr);
     }
 
@@ -49,10 +45,10 @@ if (Meteor.isServer){
   }
 
   if (Drugs.find().count() == 0){
-    // console.log("importing drugs to db")
-    // import drugsss
+
+
     drugs = JSON.parse(Assets.getText("drugs.json"));
-    // console.log(drugs);
+
     for (drug in drugs){
       Drugs.insert(drugs[drug]);
     }
@@ -63,14 +59,14 @@ if (Meteor.isServer){
   var courseCount = Courses.find().count();
   var drugCount = Drugs.find().count();
   var drugArray = Drugs.find().fetch();
-  // console.log("winecount", wineCount)
+
 
   // insert into courses database
   if (courseCount===0){
     // console.log("importing courses.json to db");
     // only need to do this once.
     var courses = JSON.parse(Assets.getText("courses.json"));
-    // // console.log(courses);
+
     for (course in courses){
       var curr = courses[course]
 
@@ -90,7 +86,7 @@ if (Meteor.isServer){
       // check difficulty
       if (difficulty >= 4.5 || difficulty <=0.5){
         if (flip(drug_probability)){
-          // console.log("assigning a drug", curr);
+
           var drug = Math.floor((Math.random()*drugCount)+1)
           Suggestion = drugArray[drug]
 
@@ -99,7 +95,7 @@ if (Meteor.isServer){
       }
       else if (workload >= 4.5 || workload <= 0.5){
         if (flip(drug_probability)){
-          // console.log("assigning a drug", curr);
+
           var drug = Math.floor((Math.random()*drugCount)+1)
           Suggestion = drugArray[drug]
           // assign a drug
@@ -108,7 +104,7 @@ if (Meteor.isServer){
       // check overall
       else if (overall >= 4.5||overall <= 0.5){
         if (flip(drug_probability)){
-          // console.log("assigning a drug", curr);
+
           var drug = Math.floor((Math.random()*drugCount)+1)
           Suggestion = drugArray[drug]
 
@@ -118,7 +114,6 @@ if (Meteor.isServer){
 
       curr.Suggestion = Suggestion;
       // hard coded jokes
-      // console.log(courses[course].cat_num);
       Courses.insert(curr);
     }
   }
@@ -126,12 +121,9 @@ if (Meteor.isServer){
   Meteor.publish("courses", function(){
     return Courses.find();
   });
-  // Meteor.publish("drugs", function(){
-  //   return Drugs.find();
+  // Meteor.publish("saved", function(){
+  //   return SavedCourses.find(this.userId)
   // });
-  Meteor.publish("saved", function(){
-    return SavedCourses.find(this.userId)
-  });
 
 }
 
@@ -155,7 +147,7 @@ if (Meteor.isClient) {
 
     // var data = SavedCourses.find({}).fetch();
     // console.log("New saved courses!", data);
-    Meteor.subscribe("userData");
+    // Meteor.subscribe("userData");
     var curr_queue = Session.get("queue")
     var curr_seen = Session.get("seen")
     var Limit = curr_seen.length + curr_queue.length + 20
@@ -168,22 +160,27 @@ if (Meteor.isClient) {
       }
       Session.set("queue", curr_queue)
     }
-    // if (Meteor.user()){
-    //   if (!Meteor.user.Yes){
-    //     Meteor.user.Yes = []
-    //   }
-    //   else{
-    //     Session.set("studyCard", Meteor.user.Yes)
-    //     // var x = 0
-    //     // for (y in Meteor.user.Yes){
-    //     //   x += Meteor.user.Yes[y].Suggestion.Proof
-    //     // }
-    //     // Session.set("percentage", Math.max(x,15))
-    //   }
-    //   if (!Meteor.user.No){
-    //     Meteor.user.No = []
-    //   }
-    // }
+    if (Meteor.user()){
+      var currStudyCard = Session.get("studyCard")
+      if (currStudyCard){
+        var x = 0
+        for (y in currStudyCard){
+          x += currStudyCard[y].Suggestion.Proof
+        }
+        Session.set("percentage", Math.max(x,15))
+            // for (y in Meteor.user.Yes){
+            //   x += Meteor.user.Yes[y].Suggestion.Proof
+            // }
+            // Session.set("percentage", Math.max(x,15))
+          }
+          else{
+            Session.set("percentage", 15)
+          }
+      }
+      else{
+        Session.set("percentage", 15)
+      }
+
   });
   // search source code
   // var options = {
@@ -200,6 +197,9 @@ if (Meteor.isClient) {
     }
   });
 Template.classy_header.helpers({
+  current:function(){
+    return [Session.get("queue")[0]]
+  },
   color:function(){
     var p = parseInt(Session.get("percentage"));
     if (p < 50){
@@ -243,26 +243,8 @@ Template.classy_header.helpers({
   }
 
 });
-Template.prereqs.events({
-  "click #no" :function next(e){
-    // console.log("hi");
-    display_next(false)
-    var curr = this
-  },
-  "click #yes":function next(e){
-    var curr = this
-    Session.set("studyCard", Session.get("studyCard").push(this))
-    display_next(true)
-    var p = parseInt(Session.get("percentage"));
-    p += curr.Suggestion.Proof;
-    Session.set("percentage", Math.max(p,15).toString());
-    // if (Meteor.user()){
-    //   var Yes = Meteor.user.Yes
-    //   Yes.push(this);
-    //   Meteor.user.Yes = Yes
-    // }
-  }
-});
+
+Template.prereqs.events({});
 
 Template.viewer.helpers({
   current:function(){
@@ -325,6 +307,30 @@ Template.homeStudyCard.helpers({
       Session.set("logging", true);
       console.log("worked")
 
+    },
+    "click #no" :function next(e){
+      display_next(false)
+      Session.set("studyCard", [])
+    },
+    "click #yes":function next(e){
+      var curr = this
+      var currArray = Session.get("studyCard")
+      if (currArray){
+        currArray.push(this)
+        Session.set("studyCard", currArray)
+      }
+      else{
+        Session.set("studyCard", [this])
+      }
+      display_next(true)
+      var p = parseInt(Session.get("percentage"));
+      p += curr.Suggestion.Proof;
+      Session.set("percentage", Math.max(p,15).toString());
+      // if (Meteor.user()){
+      //   var Yes = Meteor.user.Yes
+      //   Yes.push(this);
+      //   Meteor.user.Yes = Yes
+      // }
     }
   });
   Template.classy_footer.helpers({
@@ -418,17 +424,13 @@ function display_next(yes){
     },1000,function undo(){
       $("#banner").addClass("invisible")
           // $(".comments").hide();
-    })
-     $("#feature-box").slideUp(function(){
-     });
+    });
       $("#viewer").slideUp(function callback(){
         var queue = Session.get("queue");
         // console.log(queue.length);
         queue.shift();
         Session.set("queue", queue);
-        $("#viewer").fadeIn(500, function(){
-            $("#feature-box").animate({width:"toggle"})
-        });
+        $("#viewer").fadeIn(500)
       });
     }
 
@@ -441,15 +443,11 @@ function display_next(yes){
     },1000,function undo(){
       $("#banner").addClass("invisible")
     });
-    $("#viewer").fadeOut();
-    $("#feature-box").fadeOut(function callback(){
+    $("#viewer").fadeOut(function(){
       var queue = Session.get("queue");
       queue.shift();
       Session.set("queue", queue);
-      $("#viewer").fadeIn(500, function(){
-        $("#feature-box").animate({width:'toggle'})
-      });
-    });
-
+      $("#viewer").fadeIn(500)
+    })
   }
 }

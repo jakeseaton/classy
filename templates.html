@@ -3,13 +3,21 @@ Templates for Classy
 Developed using Meteor by Jake Seaton
 Quincy-Dewolfe 20-05
 -->
-
+<template name = "bars">
+  <div class = "bars">
+    <div class = "bar">Overall: {{{Overall}}}</div>
+    <div class = "bar">Difficulty: {{{Difficulty}}}</div>
+    <div class = "bar">Workload: {{Workload}}</div>
+  </div>
+  <br>
+  <br>
+</template>
 <template name = "viewer">
   <div id = "viewer" >
 
     {{#each current}}
     <div class = "course-info">
-      <div id = "yes">GOT IT!</div><div id = "no">NOPE</div>
+      <!-- <div id = "yes">GOT IT!</div><div id = "no">NOPE</div> -->
 
 <div id = "course-title">{{{field}}} {{{number}}}: {{{title}}}</div> <br>
 <!--
@@ -23,33 +31,22 @@ Quincy-Dewolfe 20-05
 
     <div class = "tab-content">
       <div role="tabpanel" class="tab-pane active" id = "suggestion-section">
-        <div class = "bars">
-          <div class = "bar">Overall: {{{Overall}}}</div>
-          <div class = "bar">Difficulty: {{{Difficulty}}}</div>
-          <div class = "bar">Workload: {{Workload}}</div>
-        </div>
-        <br>
-        <br>
+        {{>bars}}
         {{{Suggestion.Name}}}<br>
+        Proof: {{{Suggestion.Proof}}}%<br>
         <a href = "{{Suggestion.Url}}"><img id = "wine" src = "{{Suggestion.Icon}}"></a><br>
         <!-- {{{title}}} -->
-        {{{Suggestion.Description}}}<br>
-        Proof: {{{Suggestion.Proof}}}%
-        <div id = "yes">GOT IT!</div><div id = "no">NOPE</div>
+        <!--{{{Suggestion.Description}}}--><br>
+
+        <!-- <div id = "yes">GOT IT!</div><div id = "no">NOPE</div> -->
       </div>
       <div role="tabpanel" class="tab-pane" id = "description-section">
-
-            <div class = "bars">
-              <div class = "bar">Overall: {{{Overall}}}</div>
-              <div class = "bar">Difficulty: {{{Difficulty}}}</div>
-              <div class = "bar">Workload: {{Workload}}</div>
-            </div>
-            <br>
-            <br>
+          {{>bars}}
           <div id = "course-description">{{{description}}}</div>
 
         </div>
         <div role="tabpanel" class="tab-pane" id = "comments-section">
+          {{>bars}}
           <div class = "comments">
 
             <ul class = "comment-list">
@@ -67,7 +64,7 @@ Quincy-Dewolfe 20-05
     </div>
     <nav>
       <ul class="nav nav-tabs nav-justified">
-        <li role="presentation" class="active"><a href="#suggestion-section" aria-controls = "suggestion-section" role = "tab" data-toggle = "tab">Suggestion</a></li>
+        <li role="presentation" class="active"><a href="#suggestion-section" aria-controls = "suggestion-section" role = "tab" data-toggle = "tab">Prerequisites</a></li>
         <li role="presentation"><a href="#description-section" aria-controls="description-section" role="tab" data-toggle="tab">Description</a></li>
         <li role="presentation"><a href="#comments-section" aria-controls="comments-section" role="tab" data-toggle="tab">Comments</a></li>
       </ul>
@@ -106,7 +103,11 @@ Quincy-Dewolfe 20-05
   <header>
     <!-- <div class ="whitespace invisible"></div> -->
     <h1 id = "my-menus">Study Card</h1>
+    {{#each current}}
+    <h1 id = "no">NOPE!</h1>
     <img class = "home" src = "img/new_classy_logo3.png"/>
+    <h1 id = "yes">GOT IT</h1>
+    {{/each}}
     {{#if currentUser}}
     <h1 id = "logger">Log Out</h1>
     {{else}}
