@@ -2,6 +2,9 @@
 // Developed using Meteor by Jake Seaton
 // Quincy Dewolfe 20-05
 
+var RED = "#B71C1C"
+var BLUE = "#90A4AE"
+var GOLD = "#BC9D52"
 
 Courses = new Mongo.Collection("courses");
 Wines = new Mongo.Collection("wines");
@@ -203,13 +206,13 @@ Template.classy_header.helpers({
   color:function(){
     var p = parseInt(Session.get("percentage"));
     if (p < 50){
-      return "#90A4AE"
+      return BLUE
     }
     else if (p > 100){
-      return "#EA212E"
+      return RED//"#EA212E"
     }
     else{
-      return "#BC9D52"
+      return GOLD 
     }
   },
   percentage:function(){
@@ -259,16 +262,17 @@ Template.viewer.events({
   },
   "click #yes":function next(e){
     var curr = this
-    console.log(curr)
     display_next(true)
-    var p = parseInt(Session.get("percentage"));
-    p += curr.Suggestion.Proof;
-    Session.set("percentage", Math.max(p,15).toString());
     var currCard = Session.get("studyCard")
-    console.log(currCard)
-    currCard.push(curr)
-    console.log(currCard)
-    Session.set("studyCard", currCard)
+    // if you click this too fast it can still break this.
+    if ($.notIn(curr, currCard) == -1){
+      // var p = parseInt(Session.get("percentage"));
+      // p += curr.Suggestion.Proof;
+      // Session.set("percentage", Math.max(p,15).toString());
+      currCard.push(curr)
+      Session.set("studyCard", currCard)
+    }
+
   }
 });
 Template.homeStudyCard.helpers({
@@ -337,13 +341,13 @@ Template.homeStudyCard.helpers({
     color:function(){
       var p = parseInt(Session.get("percentage"));
       if (p < 50){
-        return "#90A4AE"
+        return BLUE
       }
       else if (p > 100){
-        return "#EA212E"
+        return RED
       }
       else{
-        return "#BC9D52"
+        return GOLD //"#BC9D52"
       }
     },
     percentage:function(){
