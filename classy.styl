@@ -5,12 +5,15 @@
 /* Global Vars */
 @import url("http://fonts.googleapis.com/css?family=Great+Vibes|Gruppo");
 @import url("http://fonts.googleapis.com/css?family=Fondamento:400italic,400");
+@import url("http://fonts.googleapis.com/css?family=Poiret+One");
+@import url("http://fonts.googleapis.com/css?family=Josefin+Sans");
 Parchment_url = url("img/parchment.jpg")
 
-Text_font_family = "Gruppo", cursive
+
+Text_font_family = "Josefin Sans", cursive
 // Classy_font = 60px 'Great Vibes', cursive
 //Classy_font = 60px "Fondamento", cursive
-Classy_font = 60px "Gruppo", cursive
+Classy_font = 60px "Josefin Sans", cursive
 // Color Scheme
 Gold = #BF9060//#BC9D52//#FFD600
 Black = #2B2A2A//#616161
@@ -31,7 +34,8 @@ viewer_height = 500px
 prereqs_height = viewer_height
 wrapper_height = 80%
 studyCardFontSize = 20px
-
+Box_Title_Size = 30px
+TableMargin = 15%
 paddingLeftRight()
   padding-left arguments
   padding-right arguments
@@ -153,11 +157,11 @@ nav
 
 #course-title
   text-align center
-  background-color Gold
-  classyFontOfSize(30px)
+  background-color Red //Gold
+  classyFontOfSize(Box_Title_Size)
   font-weight bold
   padding-bottom 5px
-  color Black
+  color White //Black
 /* Header */
 #banner
   // background-color White
@@ -192,6 +196,8 @@ header
   background header_background_color
   width 100%
   height 50%
+  border-bottom 2px solid Red
+  border-top 2px solid Red
 
   img
     width 8%
@@ -223,29 +229,6 @@ header
     &:hover
       color Red
       cursor pointer
-  #progress-bar
-  	display inline block
-  	margin-left auto
-  	margin-right auto
-  	height 50%
-    max-width 80% !important
-   //  // width 80%
-   //  // height 60%
-   //  line-height 100%
-   //  top 30%
-   //  // position absolute
-   //  left 10%
-   //  right 10%
-    border-radius 5px
-  #progress-bar-inner
-    // display inline-block
-    // // vertical-align middle
-    // vertical-align left
-    // text-align left
-    // font Classy_font
-    font Text_font_family
-    font-size 20px
-    color White
 
   #login
     float right
@@ -406,7 +389,7 @@ body
         width 36px
         height 36px
     #card-title
-      background-color Red
+      background-color Black//Red
       classyFontOfSize(20px)
       color White
       //gradient()
@@ -550,18 +533,20 @@ body
         height 20%
         bottom 0
         width 100%
-        background Gold
+        background Red//Gold
         .icon
           //background White
           left 0
           position absolute
-          height 100%
-          width 20%
+          square_image(100px)
+          // height 100%
+          // width 20%
         .info
+          color White
           position absolute
           height 100%
           right 0
-          width 80%
+          width 75%
           bottom 0
           text-align left
           b
@@ -570,7 +555,7 @@ body
           position absolute
           bottom 0
           right 0
-          width 30%
+          width 40%
           height 50%
           //background-color Red
       #course-description
@@ -609,7 +594,7 @@ body
           width 10%
           left 0
         #card-title
-          background-color Red
+          background-color Black //Red
           font Classy_font
           font-size 20px
           color White
@@ -629,7 +614,7 @@ body
       margin-right auto
       // background-color Black
       // background-image Parchment_url
-      border 1px solid Gold
+      border 1px solid Red //Gold
       box-shadow 1px 1px 1px Black
       color Black
       #refresh
@@ -710,9 +695,9 @@ body
         // border-bottom 1px solid Gold
         position absolute
         width 100%
-        height 50%
+        height 40%
         margin none
-        top 30%//bottom 10px
+        top 40%//bottom 10px
         margin-left auto
         overflow scroll
         background-color white
@@ -728,7 +713,7 @@ body
           position absolute
           li
             text-align left
-            border-bottom 2px solid Gold
+            border-bottom 2px solid Red //White//Black// Red//Gold
             // border 2px solid Gold
             // border-left none
             // border-right none
@@ -851,17 +836,92 @@ footer
     left 5%
     // position relative
     position absolute
-    overflow auto
+    overflow hidden
     margin-top 10px
     margin-right 10px
     height prereqs_height
     // float right
-    border 1px solid Red
+    border 1px solid Black//Red
     border-radius 4px
     box-shadow 1px 1px 1px Black
     background-color Blank
     &:hover
       box-shadow 2px 2px 2px Black
+
+      //position absolute
+      // bottom 0
+    #status-bar
+      width 100%
+      height 20%
+      bottom 0
+      background-color Black//ue
+      img
+        square_image(100px)
+        // float left
+        position absolute
+        bottom 0
+        right 0
+        margin 0
+      #status
+        color White
+        text-align center
+        width 80%
+        //bottom 0
+        //position absolute
+        //top 5%
+        //right 0
+        //padding-right 10px
+        padding-top 20px
+
+        a
+          font-weight bold
+          color White
+          &:hover
+            text-decoration none
+            color Red
+      #progress-bar-wrapper
+        //background-color Blue
+        width 80%
+        left 0
+        bottom 0
+        padding-bottom 10px
+        position absolute
+        overflow hidden
+        paddingLeftRight(10px)
+
+        #progress-bar
+        	display inline block
+        	//margin-left auto
+        	//margin-right auto
+        	height 50%
+          background-color White
+          //max-width 80% !important
+          margin 0
+         //  // width 80%
+         //  // height 60%
+         //  line-height 100%
+         //  top 30%
+         //  // position absolute
+         //  left 10%
+         //  right 10%
+          border-radius 10px
+        #progress-bar-inner
+          // display inline-block
+          // // vertical-align middle
+          // vertical-align left
+          // text-align left
+          // font Classy_font
+          text-align left
+          padding-top 2px
+          padding-bottom 2px
+          padding-left 2px
+          font Text_font_family
+          font-size 20px
+          color White
+  #box-content
+    height 80%
+    // background-color Gold
+    overflow scroll
     h2
       margin-left auto
       margin-right auto
@@ -887,9 +947,9 @@ footer
       width 10%
       left 0
     #card-title
-      background-color Red
-      font Classy_font
-      font-size 20px
+      background-color Black//Red
+      classyFontOfSize(Box_Title_Size)
+      font-weight bold
       color White
 
       //gradient()
@@ -899,11 +959,11 @@ footer
       text-align left
       padding 5px
       border Black
-      position absolute
+      //position absolute
       top 0
       // height 100%
       z-index 30
-      margin-top 5%
+      //margin-top TableMargin
       margin-left auto
       margin-right auto
       display inherit
@@ -968,7 +1028,7 @@ buttons()
   //position absolute
   border-radius 5px
   color White
-  background Red//Blue
+  background Black//Blue
   display inline-block
   padding 10px
   position absolute
@@ -978,7 +1038,9 @@ buttons()
 #yes
   buttons()
   right 0
-
+  &:hover
+    cursor pointer
+    color Red
   // redButtons()
   // // position absolute
   // display inline-block
@@ -992,6 +1054,9 @@ buttons()
 #no
   buttons()
   left 0
+  &:hover
+    cursor pointer
+    color Red
   // redButtons()
   // // bottom 1%
   // // border-radius 5px
@@ -1015,6 +1080,7 @@ buttons()
 
 .regular-font
   font-family Text_font_family
+  font-size 20px
 #print
   display inline-block
   position absolute

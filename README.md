@@ -21,17 +21,19 @@ It uses information from the CS50 courses API, the Wine.com API, and the Nationa
 
 The user has the opportunity to shop for courses one at a time. If they accept the course, it is added to their study card, and their blood alcohol level increases. They can also literally shop the paired alcohol by clicking on the icon. Additional features, such as the inclusion of abusive drugs in the database, re-writing of comments from the Harvard Q data, the reactive blood alcohol level display, and the single course presentation are designed to keep the user interested and laughing.
 
-Front End
----
 Meteor
-
-Stylus
-
-
-Back End
 ---
+Meteor.
 
-Meteor
+Libraries
+---
+- Stylus
+- accounts-ui
+- accounts-password
+- bootstrap
+- jquery
+- u2622:persistent-session
+
 
 
 To Use

@@ -6,10 +6,25 @@ var RED = "#B71C1C"
 var BLUE = "#90A4AE"
 var GOLD = "#BC9D52"
 
+var STATUSTODATA  = {
+  "":["http://harvardlampoon.com", "drunk/sober.png"],
+  "SOBER":["http://www.urbandictionary.com/define.php?term=sober", "drunk/sober.png"],
+  "BUZZED":["http://www.urbandictionary.com/define.php?term=buzzed", "drunk/sober.png"],
+  "HORNY":["http://www.urbandictionary.com/define.php?term=horny", "drunk/tipsy.png"],
+  "SLOPPY":["http://www.urbandictionary.com/define.php?term=sloppy", "drunk/buzzed.png"],
+  "HAMMERED":["http://www.urbandictionary.com/define.php?term=hammered", "drunk/buzzed.png"],
+  "WASTED":["http://www.urbandictionary.com/define.php?term=White+Girl+Wasted", "drunk/wasted.png"],
+  "SHITFACED":["http://www.urbandictionary.com/define.php?term=shitfaced", "drunk/wasted.png"],
+  "BLACKOUT":["http://www.urbandictionary.com/define.php?term=blackout", "drunk/blackout.png"],
+  "CLICK HERE":["http://huhs.harvard.edu/need-care/get-help-now", "drugs/meth.png"]
+}
+
+var STATUSES = ["", "SOBER", "BUZZED", "HORNY", "SLOPPY", "HAMMERED", "WASTED", "SHITFACED", "BLACKOUT", "CLICK HERE"]
 Courses = new Mongo.Collection("courses");
 Wines = new Mongo.Collection("wines");
 Drugs = new Mongo.Collection("drugs");
 var banners = ["Got it!"]//["Nice!", "Got it!", "Careful!", "Yikes!", "Yesh!","What?","Smart!", "Look at your life", "Look at your choices"]
+var vomBanners = ["BLEARGH", "MUCH BETTER", "HOLD MY HAIR"]
 // SavedCourses = new Mongo.Collection("saved");
 
 
@@ -83,7 +98,7 @@ if (Meteor.isServer){
       curr.Workload = workload;
       curr.Overall = overall;
 
-      drug_probability = 25
+      drug_probability = 50
 
 
       // check difficulty
@@ -144,10 +159,8 @@ if (Meteor.isClient) {
   Session.setDefault("queue", []);
   Session.setDefault("seen", [])
   // Session.set("percentage", 15)
-
   Tracker.autorun(function () {
     // Meteor.subscribe("saved");
-
     // var data = SavedCourses.find({}).fetch();
     // console.log("New saved courses!", data);
     // Meteor.subscribe("userData");
@@ -212,7 +225,7 @@ Template.classy_header.helpers({
       return RED//"#EA212E"
     }
     else{
-      return GOLD 
+      return GOLD
     }
   },
   percentage:function(){
@@ -222,15 +235,16 @@ Template.classy_header.helpers({
   message:function(){
     return "Drunk-o'-Meter"
     // var p = Session.get("percentage")
-    // if (p < 50){
-    //   return "Sober"
-    // }
-    // else if  (p>100){
-    //   return "Danger!"
-    // }
-    // else{
-    //   return "Careful"
-    // }
+    // // var
+    // // if (p < 50){
+    // //   return "Sober"
+    // // }
+    // // else if  (p>100){
+    // //   return "Danger!"
+    // // }
+    // // else{
+    // //   return "Careful"
+    // // }
   },
   img:function(){
     var p = Session.get("percentage");
@@ -256,24 +270,48 @@ Template.viewer.helpers({
 });
 Template.viewer.events({
   "click #no" :function next(e){
-    // console.log("hi");
     display_next(false)
-    var curr = this
   },
   "click #yes":function next(e){
     var curr = this
-    display_next(true)
-    var currCard = Session.get("studyCard")
-    // if you click this too fast it can still break this.
-    if ($.notIn(curr, currCard) == -1){
-      // var p = parseInt(Session.get("percentage"));
-      // p += curr.Suggestion.Proof;
-      // Session.set("percentage", Math.max(p,15).toString());
-      currCard.push(curr)
-      Session.set("studyCard", currCard)
+    var currArray = Session.get("studyCard")
+    if (currArray){
+      currArray.push(this)
+      Session.set("studyCard", currArray)
     }
-
+    else{
+      Session.set("studyCard", [this])
+    }
+    display_next(true)
+    var p = parseInt(Session.get("percentage"));
+    p += curr.Suggestion.Proof;
+    Session.set("percentage", Math.max(p,15).toString());
+    // if (Meteor.user()){
+    //   var Yes = Meteor.user.Yes
+    //   Yes.push(this);
+    //   Meteor.user.Yes = Yes
+    // }
   }
+
+  // "click #no" :function next(e){
+  //   // console.log("hi");
+  //   display_next(false)
+  //   var curr = this
+  // },
+  // "click #yes":function next(e){
+  //   var curr = this
+  //   display_next(true)
+  //   var currCard = Session.get("studyCard")
+  //   // if you click this too fast it can still break this.
+  //   if ($.notIn(curr, currCard) == -1){
+  //     // var p = parseInt(Session.get("percentage"));
+  //     // p += curr.Suggestion.Proof;
+  //     // Session.set("percentage", Math.max(p,15).toString());
+  //     currCard.push(curr)
+  //     Session.set("studyCard", currCard)
+  //   }
+  //
+  // }
 });
 Template.homeStudyCard.helpers({
   studyCard:function(){
@@ -312,29 +350,37 @@ Template.homeStudyCard.helpers({
       console.log("worked")
 
     },
-    "click #no" :function next(e){
-      display_next(false)
+    "click #vomit":function(){
       Session.set("studyCard", [])
+    }
+  });
+  Template.statusBar.helpers({
+    percentage:function(){
+      return Session.get("percentage")
     },
-    "click #yes":function next(e){
-      var curr = this
-      var currArray = Session.get("studyCard")
-      if (currArray){
-        currArray.push(this)
-        Session.set("studyCard", currArray)
-      }
-      else{
-        Session.set("studyCard", [this])
-      }
-      display_next(true)
-      var p = parseInt(Session.get("percentage"));
-      p += curr.Suggestion.Proof;
-      Session.set("percentage", Math.max(p,15).toString());
-      // if (Meteor.user()){
-      //   var Yes = Meteor.user.Yes
-      //   Yes.push(this);
-      //   Meteor.user.Yes = Yes
-      // }
+    color:function(){
+      return RED
+    },
+    link:function(){
+      var p = Session.get("percentage")
+      var index = getIndex(p)
+      var status = STATUSES[index]
+      var url = STATUSTODATA[status][0]
+      return url
+    },
+    status:function(){
+      var p = Session.get("percentage")
+      var index = getIndex(p)
+      var status = STATUSES[index]
+      return status
+    },
+    image:function(){
+      var p = Session.get("percentage")
+      var index = getIndex(p)
+      var status = STATUSES[index]
+      var statusData = STATUSTODATA[status]
+      var img = statusData[1]
+      return img
     }
   });
   Template.classy_footer.helpers({
@@ -408,6 +454,16 @@ function flip(chance){
 
 }
 
+function getIndex(p){
+  // p is the percentage
+  var index = Math.floor(p / 10)
+  if (index >= 10){
+    return 9
+  }
+  else{
+    return index
+  }
+}
 
 function display_next(yes){
   if (yes){
