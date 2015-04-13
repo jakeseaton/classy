@@ -2,10 +2,12 @@
 // Developed using Stylus by Jake Seaton
 // Quincy Dewolfe 20-05
 
+/* Disclaimer--This is absurdely disorganized due to so many iteractions on the design
+
 /* Global Vars */
-@import url("http://fonts.googleapis.com/css?family=Great+Vibes|Gruppo");
-@import url("http://fonts.googleapis.com/css?family=Fondamento:400italic,400");
-@import url("http://fonts.googleapis.com/css?family=Poiret+One");
+//@import url("http://fonts.googleapis.com/css?family=Great+Vibes|Gruppo");
+//@import url("http://fonts.googleapis.com/css?family=Fondamento:400italic,400");
+//@import url("http://fonts.googleapis.com/css?family=Poiret+One");
 @import url("http://fonts.googleapis.com/css?family=Josefin+Sans");
 Parchment_url = url("img/parchment.jpg")
 
@@ -160,7 +162,7 @@ nav
   background-color Red //Gold
   classyFontOfSize(Box_Title_Size)
   font-weight bold
-  padding-bottom 5px
+  paddingTopBottom(5px)
   color White //Black
 /* Header */
 #banner
@@ -513,6 +515,8 @@ body
     // left 25%
     // right 25%
     #viewer
+      &:hover
+        box-shadow 2px 2px 2px Black
       a
         text-decoration none
         color Black
@@ -695,9 +699,9 @@ body
         // border-bottom 1px solid Gold
         position absolute
         width 100%
-        height 40%
+        height 38%
         margin none
-        top 40%//bottom 10px
+        top 42%//bottom 10px
         margin-left auto
         overflow scroll
         background-color white
@@ -951,6 +955,7 @@ footer
       classyFontOfSize(Box_Title_Size)
       font-weight bold
       color White
+      paddingTopBottom(5px)
 
       //gradient()
     #studycard
@@ -970,21 +975,24 @@ footer
       padding-left 5%
       padding-right 5%
       th
-        border-top 1px solid Gold
+        border-top 1px solid Black//Red//Gold
         padding-right 15px
-        padding-top 10px
+        padding-top 20px
         font-size studyCardFontSize
         img
           square_image(20px)
           margin 0px !important
       tr
-        width 10px
+        //width 10px
+        //paddingTopBottom(5px)
+
       .head-row
         border-bottom 2px solid Red
         font Classy_font
         th
           border-top none !important
           padding-top 20px
+          padding-bottom 5px
           font-size 25px
 
 //

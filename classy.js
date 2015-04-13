@@ -23,7 +23,7 @@ var STATUSES = ["", "SOBER", "BUZZED", "HORNY", "SLOPPY", "HAMMERED", "WASTED", 
 Courses = new Mongo.Collection("courses");
 Wines = new Mongo.Collection("wines");
 Drugs = new Mongo.Collection("drugs");
-var banners = ["Got it!"]//["Nice!", "Got it!", "Careful!", "Yikes!", "Yesh!","What?","Smart!", "Look at your life", "Look at your choices"]
+var banners = ["You Did It!"]//["Nice!", "Got it!", "Careful!", "Yikes!", "Yesh!","What?","Smart!", "Look at your life", "Look at your choices"]
 var vomBanners = ["BLEARGH", "MUCH BETTER", "HOLD MY HAIR"]
 // SavedCourses = new Mongo.Collection("saved");
 
@@ -351,6 +351,7 @@ Template.homeStudyCard.helpers({
 
     },
     "click #vomit":function(){
+      vomit()
       Session.set("studyCard", [])
     }
   });
@@ -426,6 +427,10 @@ Template.homeStudyCard.helpers({
       Session.set("viewingStudyCard", false);
       Session.set("logging", false)
       Session.set("browsing", true)
+    },
+    "click #print":function(){
+      //console.log("printing")
+      //window.print()
     }
   })
 
@@ -511,3 +516,28 @@ function display_next(yes){
     })
   }
 }
+
+function vomit(){
+  var rand = vomBanners[Math.floor(Math.random() * vomBanners.length)];
+  $("#banner").css("font-size",60)
+  // console.log(this.Suggestion.Icon)
+  // construct = "<img id = 'banner-image' src = "+this.Suggestion.Icon+">"
+  $("#banner").html(rand)
+  $("#banner").removeClass("invisible")
+  // $("#banner-image").animate({
+  //   "width":"800px",
+  //   "height": "800px",
+  // },function undo(){
+  //   $("#banner").addClass("invisible")
+  // });
+  $("#banner").animate({
+    "font-size":"200"
+  },1000,function undo(){
+    $("#banner").animate({
+      color: "black"
+    }, function(){
+      $("#banner").addClass("invisible")
+    })
+        // $(".comments").hide();
+  });
+  }

@@ -35,12 +35,12 @@ Quincy-Dewolfe 20-05
     {{#each current}}
     <div class = "bottom">
       <!--{{>bars}}-->
-      <img class = "icon" src = "{{Suggestion.Icon}}">
+      <a href = "{{Suggestion.Url}}"><img class = "icon" src = "{{Suggestion.Icon}}"></a>
       <div class = "info"><b>You'll Need</b>: <br>{{{Suggestion.Name}}}<br>
-      Proof: {{{Suggestion.Proof}}}%<br></div>
+      Proof: {{{Suggestion.Proof}}}%<br><!-- Overall: {{{Overall}}}    Difficulty: {{{Difficulty}}}   Workload: {{Workload}}<br>--></div>
       <div class = "decision"><div id = "no">NO WAY</div><div id = "yes">DO IT!</div></div>
     </div>
-    <div class = "rating"></div>
+    <!-- <div class = "rating"></div> -->
 
     <div class = "course-info">
       <!-- <div id = "yes">GOT IT!</div><div id = "no">NOPE</div> -->
@@ -167,7 +167,7 @@ Quincy-Dewolfe 20-05
     <!-- new_classy_logo3.png -->
   <a href = "/"><img id = "logo" src = "img/classylogo.png"></a><br>
   <!-- <div class =  "classy-font">Classy</div> -->
-  <div class = "regular-font">Shop for fine courses and wine</div>
+  <div class = "regular-font">Shop for courses and how to handle them!</div>
   {{> loginButtons}}
 </div>
   {{> classy_footer}}

@@ -15,11 +15,15 @@ Product: classyapp.meteor.com
 DESCRPTION
 ---
 
-Classy allows the user to shop for courses and how to deal with them. 
+Classy allows the user to shop for courses and how to handle them. 
 
 It uses information from the CS50 courses API, the Wine.com API, and the National Institute on Drug Abuse to pair courses with wines. As courses become more difficult or have low overall scores, there is a chance that instead of a wine, an abusive drug will be assigned.
 
-The user has the opportunity to shop for courses one at a time. If they accept the course, it is added to their study card, and their blood alcohol level increases. They can also literally shop the paired alcohol by clicking on the icon. Additional features, such as the inclusion of abusive drugs in the database, re-writing of comments from the Harvard Q data, the reactive blood alcohol level display, and the single course presentation are designed to keep the user interested and laughing.
+The user views courses one at a time, and decides whether to do it or back out. If they accept the course, it is added to their study card, and their blood alcohol level increases. As the user gets drunker and drunker, and their schedule gets more and more difficult, the indicators at the bottom of the study card change.  
+
+It things go south, they can always vomit to reduce their BAL and clear their card.
+
+It makes use of Meteor's emphasis on reactive data to keep various UI elements constantly changing, so that the user stays interested and laughing. It reactively rewrited comments from the Q with its suggestion information, occasionally presents drugs, and gives the user various links depending on their state. For example, they can also literally shop for the paired alcohol by clicking on the icon, or figure out what they need to know about their current diagnosis.
 
 Meteor
 ---
@@ -35,7 +39,6 @@ Libraries
 - u2622:persistent-session
 
 
-
 To Use
 ---
 
@@ -44,4 +47,4 @@ To Use
 
 Known Issues:
 
---Meteor's login functionality is occasionally wonky, particularly on mobile.
+-Some Meteor wonkiness, particularly in the sign-in process and loading of suggestions on the course card.
