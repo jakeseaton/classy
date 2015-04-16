@@ -23,8 +23,10 @@ var STATUSES = ["", "SOBER", "BUZZED", "HORNY", "SLOPPY", "HAMMERED", "WASTED", 
 Courses = new Mongo.Collection("courses");
 Wines = new Mongo.Collection("wines");
 Drugs = new Mongo.Collection("drugs");
-var banners = ["You Did It!"]//["Nice!", "Got it!", "Careful!", "Yikes!", "Yesh!","What?","Smart!", "Look at your life", "Look at your choices"]
+var banners = ["CLASSY!", "DRINK UP!", "KEG STAND!", "SHOTS!", "WINE NIGHT!", "GOOD CHOICE!"]//["Nice!", "Got it!", "Careful!", "Yikes!", "Yesh!","What?","Smart!", "Look at your life", "Look at your choices"]
 var vomBanners = ["BLEARGH", "MUCH BETTER", "HOLD MY HAIR"]
+var vomNoises = ["noises/vomit1.wav", "noises/vomit2.wav"]
+
 // SavedCourses = new Mongo.Collection("saved");
 
 
@@ -97,12 +99,16 @@ if (Meteor.isServer){
       curr.Difficulty = difficulty;
       curr.Workload = workload;
       curr.Overall = overall;
+      // curr.OverallCritical = false
+      // curr.WorkloadCritical = false
+      // curr.DifficultyCritical = false
 
       drug_probability = 50
 
 
       // check difficulty
       if (difficulty >= 4.5 || difficulty <=0.5){
+        // curr.DifficultyCritical = true
         if (flip(drug_probability)){
 
           var drug = Math.floor((Math.random()*drugCount)+1)
@@ -112,6 +118,7 @@ if (Meteor.isServer){
         }
       }
       else if (workload >= 4.5 || workload <= 0.5){
+        //curr.WorkloadCritical = true
         if (flip(drug_probability)){
 
           var drug = Math.floor((Math.random()*drugCount)+1)
@@ -121,6 +128,7 @@ if (Meteor.isServer){
       }
       // check overall
       else if (overall >= 4.5||overall <= 0.5){
+        //curr.OverallCritical = true
         if (flip(drug_probability)){
 
           var drug = Math.floor((Math.random()*drugCount)+1)
@@ -136,8 +144,12 @@ if (Meteor.isServer){
     }
   }
 
-  Meteor.publish("courses", function(){
-    return Courses.find();
+  Meteor.publish("courses", function(limit){
+
+    var defaultLimit = limit || 10
+    var randomIndex =  Math.floor((Math.random()*courseCount)+1)
+    // limit courseCount
+    return Courses.find({}, {limit:defaultLimit}, {skip:randomIndex})
   });
   // Meteor.publish("saved", function(){
   //   return SavedCourses.find(this.userId)
@@ -148,7 +160,7 @@ if (Meteor.isServer){
 // Client code
 if (Meteor.isClient) {
 
-  Meteor.subscribe("courses");
+  // Meteor.subscribe("courses");
   // Meteor.subscribe("saved");
   /* set defaults */
   Session.setDefault("viewingStudyCard", false);
@@ -164,11 +176,15 @@ if (Meteor.isClient) {
     // var data = SavedCourses.find({}).fetch();
     // console.log("New saved courses!", data);
     // Meteor.subscribe("userData");
+    // can do Session.get('limit')
     var curr_queue = Session.get("queue")
     var curr_seen = Session.get("seen")
     var Limit = curr_seen.length + curr_queue.length + 20
     if (curr_queue.length < 10){
-      var new_courses = Courses.find({}, {limit:Limit}).fetch()
+      Meteor.subscribe("courses", Limit)
+      // var new_courses = Courses.find({}, {limit:Limit}).fetch()
+      var new_courses = Courses.find({}).fetch()
+      console.log(new_courses)
       for (i in new_courses){
         if ($.inArray(new_courses[i].cat_num, curr_seen) == -1){
           curr_queue.push(new_courses[i]);
@@ -352,6 +368,7 @@ Template.homeStudyCard.helpers({
     },
     "click #vomit":function(){
       vomit()
+      //window.open('www.google.com','_blank');
       Session.set("studyCard", [])
     }
   });
@@ -477,48 +494,54 @@ function display_next(yes){
     // console.log(this.Suggestion.Icon)
     // construct = "<img id = 'banner-image' src = "+this.Suggestion.Icon+">"
     $("#banner").html(rand)
-    $("#banner").removeClass("invisible")
+
+    $("#viewer").slideUp(function callback(){
+      var queue = Session.get("queue");
+      // console.log(queue.length);
+      queue.shift();
+      Session.set("queue", queue);
+      $("#banner").removeClass("invisible")
+      $("#banner").animate({
+        "font-size":"200"
+      },1000,function undo(){
+        $("#banner").addClass("invisible")
+        $("#viewer").fadeIn(500)
+            // $(".comments").hide();
+      });
+    });
     // $("#banner-image").animate({
     //   "width":"800px",
     //   "height": "800px",
     // },function undo(){
     //   $("#banner").addClass("invisible")
     // });
-    $("#banner").animate({
-      "font-size":"200"
-    },1000,function undo(){
-      $("#banner").addClass("invisible")
-          // $(".comments").hide();
-    });
-      $("#viewer").slideUp(function callback(){
-        var queue = Session.get("queue");
-        // console.log(queue.length);
-        queue.shift();
-        Session.set("queue", queue);
-        $("#viewer").fadeIn(500)
-      });
+
     }
 
   else{
-    $("#banner").css("font-size",60)
-    $("#banner").html("NOPE!")
-    $("#banner").removeClass("invisible")
-    $("#banner").animate({
-      "font-size":"76"
-    },1000,function undo(){
-      $("#banner").addClass("invisible")
-    });
+
     $("#viewer").fadeOut(function(){
       var queue = Session.get("queue");
       queue.shift();
       Session.set("queue", queue);
-      $("#viewer").fadeIn(500)
+      $("#banner").css("font-size",60)
+      $("#banner").html("MAYBE NEXT TIME")
+      $("#banner").removeClass("invisible")
+      $("#banner").animate({
+        "font-size":"76"
+      },1000,function undo(){
+        $("#banner").addClass("invisible")
+        $("#viewer").fadeIn(500)
+      });
     })
   }
 }
 
 function vomit(){
   var rand = vomBanners[Math.floor(Math.random() * vomBanners.length)];
+  var randNoise = vomNoises[Math.floor(Math.random() * vomNoises.length)];
+
+  new Audio(randNoise).play();
   $("#banner").css("font-size",60)
   // console.log(this.Suggestion.Icon)
   // construct = "<img id = 'banner-image' src = "+this.Suggestion.Icon+">"

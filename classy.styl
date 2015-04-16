@@ -28,7 +28,7 @@ Cream = #FFFDE7
 header_background_color = Black
 results_background_color = Gold
 
-center_width = 45%
+center_width = 50%
 right_width = 100% - center_width
 drawer_width = 100% - center_width
 drawer_height = 100%
@@ -38,6 +38,9 @@ wrapper_height = 80%
 studyCardFontSize = 20px
 Box_Title_Size = 30px
 TableMargin = 15%
+InfoWidth = 35%
+DecisionWidth = 40%
+
 paddingLeftRight()
   padding-left arguments
   padding-right arguments
@@ -75,6 +78,10 @@ redButtonsHover()
   background Red
   color Black
   cursor pointer
+body
+  min-width 1000px !important
+  //width auto !important
+  // width 8000px
 b
   font-weight bold !important
 
@@ -163,7 +170,9 @@ nav
   classyFontOfSize(Box_Title_Size)
   font-weight bold
   paddingTopBottom(5px)
-  color White //Black
+  color White
+  b
+    text-decoration underline//Black
 /* Header */
 #banner
   // background-color White
@@ -178,6 +187,7 @@ nav
   width 100%
   margin-bottom auto
   z-index 30
+  text-shadow 2px 2px Black//White
 #circle
   position absolute
   background-color Red
@@ -509,7 +519,7 @@ body
     float left
     min-height 100%
     // height 100%
-    overflow scroll
+    //overflow scroll
     z-index 10
     // background-image url("img/parchment.jpg")
     // left 25%
@@ -540,34 +550,36 @@ body
         background Red//Gold
         .icon
           //background White
-          left 0
+          left 5px
+          bottom 5px
           position absolute
-          square_image(100px)
+          square_image(90px)
           // height 100%
           // width 20%
         .info
           color White
           position absolute
           height 100%
-          right 0
-          width 75%
-          bottom 0
+          right DecisionWidth
+          width InfoWidth + 20%//75%
+          bottom -10px//0
           text-align left
           b
             font-weight bold
         .decision
           position absolute
-          bottom 0
+          bottom -10px//0
           right 0
           width 40%
-          height 50%
+          height 100%
           //background-color Red
       #course-description
         text-align left
         width 90%
+        height 50%
         margin-left auto
         margin-right auto
-        overflow scroll
+        overflow hidden
       #suggestion-section
         font Classy_font
         font-size 20px
@@ -602,6 +614,7 @@ body
           font Classy_font
           font-size 20px
           color White
+          text-decoration underline
           //gradient()
       border-radius 4px
       position relative
@@ -860,11 +873,11 @@ footer
       bottom 0
       background-color Black//ue
       img
-        square_image(100px)
+        square_image(90px)
         // float left
         position absolute
-        bottom 0
-        right 0
+        bottom 5px
+        right 5px
         margin 0
       #status
         color White
@@ -956,6 +969,7 @@ footer
       font-weight bold
       color White
       paddingTopBottom(5px)
+      text-decoration underline
 
       //gradient()
     #studycard
@@ -1040,12 +1054,15 @@ buttons()
   display inline-block
   padding 10px
   position absolute
-  bottom 0
+  //bottom 0
   margin-bottom 2px
   margin-right 2px
+  width 70%
+  text-align center
 #yes
   buttons()
   right 0
+  border 1px solid White
   &:hover
     cursor pointer
     color Red
@@ -1061,7 +1078,9 @@ buttons()
 
 #no
   buttons()
-  left 0
+  right 0
+  bottom 10px
+  // font-size 12px
   &:hover
     cursor pointer
     color Red
