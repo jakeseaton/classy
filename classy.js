@@ -589,10 +589,10 @@ function getIndex(p){
 function display_next(yes){
   if (yes){
     var rand = banners[Math.floor(Math.random() * banners.length)];
+    
     $("#banner").css("font-size",60)
     // console.log(this.Suggestion.Icon)
     // construct = "<img id = 'banner-image' src = "+this.Suggestion.Icon+">"
-    $("#banner").html(rand)
 
     $("#viewer").slideUp(function callback(){
       var queue = Session.get("queue");
@@ -600,6 +600,14 @@ function display_next(yes){
       queue.shift();
       Session.set("queue", queue);
       $("#banner").removeClass("invisible")
+      var p = Session.get("percentage")
+      var index = getIndex(p)
+      var banner = STATUSES[index]
+      if (banner == "CLICK HERE"){
+        banner = "DANGER!"
+      }
+              $("#banner").html(banner)
+
       $("#banner").animate({
         "font-size":"200"
       },1000,function undo(){
