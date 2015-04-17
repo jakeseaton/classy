@@ -27,7 +27,7 @@ var banners = ["CLASSY!", "DRINK UP!", "KEG STAND!", "SHOTS!", "WINE NIGHT!", "!
 var noBanners = ["MAYBE NEXT TIME", "TRYING TO CUT BACK","NAH", "OH, COME ON!"]
 var vomBanners = ["BLEARGH", "MUCH BETTER", "HOLD MY HAIR"]
 var vomNoises = ["noises/vomit1.wav", "noises/vomit2.wav"]
-var drinkNoises = ["noises/drinking.mp3", "noises/bubbles1.wav"]
+var drinkNoises = ["noises/drinking.mp3", "noises/bubbles1.wav", "noises/pouring.wav","noises/pop.aiff", "noises/bottleOpen.wav"]
 
 // SavedCourses = new Mongo.Collection("saved");
 
