@@ -340,7 +340,7 @@ Template.viewer.events({
       var dest = $(e.target).parent().attr("href")
     window.open(dest,'_blank');
     }
-    
+
   }
 
   // "click #no" :function next(e){
@@ -654,7 +654,7 @@ function vomit(){
   //   $("#banner").addClass("invisible")
   // });
   $("#banner").animate({
-    "font-size":"200"
+    "font-size":"150"
   },1000,function undo(){
     $("#banner").animate({
       color: "black"
