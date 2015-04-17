@@ -39,6 +39,7 @@ studyCardFontSize = 20px
 Box_Title_Size = 30px
 TableMargin = 15%
 InfoWidth = 35%
+MinimumWidthForApplication = 1300px
 DecisionWidth = 40%
 
 paddingLeftRight()
@@ -79,9 +80,11 @@ redButtonsHover()
   color Black
   cursor pointer
 body
-  min-width 1000px !important
+  min-width MinimumWidthForApplication !important
   //width auto !important
   // width 8000px
+#delete
+  square_image(36px) !important
 b
   font-weight bold !important
 
@@ -350,6 +353,7 @@ body
 
 #wrapper
   width 100%
+  min-width MinimumWidthForApplication
   height wrapper_height
   overflow scroll
   -webkit-transition all 2s ease /* For Safari 3.1 to 6.0 */

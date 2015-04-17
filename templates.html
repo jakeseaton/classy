@@ -139,9 +139,9 @@ Quincy-Dewolfe 20-05
       <div id = "card-title">My Study Card</div>
       {{#if studyCard}}
       <table id = "studycard">
-      <tr class = "head-row"><th>Title</th><th>Overall</th><th>You'll Need...</th></tr>
+      <tr class = "head-row"><th>Title</th><th>Overall</th><th>You'll Need...</th><th></th></tr>
       {{#each studyCard}}
-      <tr><th>{{field}}: {{number}}</th><th><img src = "{{Suggestion.Icon}}"> {{Overall}}</th><th>{{Suggestion.Name}}</th></tr>
+      <tr><th>{{field}}: {{number}}</th><th><img src = "{{Suggestion.Icon}}"> {{Overall}}</th><th>{{Suggestion.Name}}</th><th><img id = "delete" src = "img/deleteIcon.png"></th></tr>
       {{/each}}
       </table>
       {{else}}
@@ -221,9 +221,9 @@ Quincy-Dewolfe 20-05
 
 
     <table id = "studycard">
-    <tr class = "head-row"><th>Title</th><th>Overall</th><th>You'll Need...</th></tr>
+    <tr class = "head-row"><th>Title</th><th>Overall</th><th>You'll Need...</th><th></th></tr>
     {{#each studyCard}}
-    <tr><th>{{field}}: {{number}}</th><th><img src = "{{Suggestion.Icon}}"> {{Overall}}</th><th>{{Suggestion.Name}}</th></tr>
+    <tr><th>{{field}}: {{number}}</th><th><img src = "{{Suggestion.Icon}}"> {{Overall}}</th><th>{{Suggestion.Name}}</th><th><img id = "delete" src = "img/deleteIcon.png"></th></tr>
     {{/each}}
     </table>
     {{else}}

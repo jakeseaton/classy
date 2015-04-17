@@ -24,6 +24,7 @@ Courses = new Mongo.Collection("courses");
 Wines = new Mongo.Collection("wines");
 Drugs = new Mongo.Collection("drugs");
 var banners = ["CLASSY!", "DRINK UP!", "KEG STAND!", "SHOTS!", "WINE NIGHT!", "GOOD CHOICE!"]//["Nice!", "Got it!", "Careful!", "Yikes!", "Yesh!","What?","Smart!", "Look at your life", "Look at your choices"]
+var noBanners = ["MAYBE NEXT TIME", "TRYING TO CUT BACK"]
 var vomBanners = ["BLEARGH", "MUCH BETTER", "HOLD MY HAIR"]
 var vomNoises = ["noises/vomit1.wav", "noises/vomit2.wav"]
 
@@ -89,6 +90,9 @@ if (Meteor.isServer){
 
     for (course in courses){
       var curr = courses[course]
+      if (curr["description"] == "") {
+        curr["description"] = "No description."
+      }
 
       var difficulty = (Math.random()*5).toPrecision(2)
       var workload = (Math.random()*5).toPrecision(2)
@@ -150,6 +154,7 @@ if (Meteor.isServer){
     var randomIndex =  Math.floor((Math.random()*courseCount)+1)
     // limit courseCount
     return Courses.find({}, {limit:defaultLimit}, {skip:randomIndex})
+    // return Courses.find({})
   });
   // Meteor.publish("saved", function(){
   //   return SavedCourses.find(this.userId)
@@ -172,24 +177,26 @@ if (Meteor.isClient) {
   Session.setDefault("seen", [])
   // Session.set("percentage", 15)
   Tracker.autorun(function () {
-    // Meteor.subscribe("saved");
-    // var data = SavedCourses.find({}).fetch();
-    // console.log("New saved courses!", data);
-    // Meteor.subscribe("userData");
-    // can do Session.get('limit')
+
     var curr_queue = Session.get("queue")
     var curr_seen = Session.get("seen")
     var Limit = curr_seen.length + curr_queue.length + 20
     if (curr_queue.length < 10){
       Meteor.subscribe("courses", Limit)
+      // var Skip = Math.floor((Math.random()*4000)+1);
       // var new_courses = Courses.find({}, {limit:Limit}).fetch()
       var new_courses = Courses.find({}).fetch()
-      console.log(new_courses)
+      // var randomIndex = Math.floor(Math.random() * new_courses.length + 1);
+
+      // console.log(new_courses)
+      // console.log(new_courses[randomIndex])
       for (i in new_courses){
         if ($.inArray(new_courses[i].cat_num, curr_seen) == -1){
+          console.log("adding", new_courses[i].cat_num, "to queue!")
           curr_queue.push(new_courses[i]);
         }
       }
+      console.log(curr_queue)
       Session.set("queue", curr_queue)
     }
     if (Meteor.user()){
@@ -286,11 +293,19 @@ Template.viewer.helpers({
 });
 Template.viewer.events({
   "click #no" :function next(e){
+    seen = Session.get("seen")
+    seen.push(this.cat_num)
+    console.log(seen)
+    Session.set("seen", seen)
     display_next(false)
   },
   "click #yes":function next(e){
     var curr = this
     var currArray = Session.get("studyCard")
+    var seen = Session.get("seen")
+    console.log(seen)
+    seen.push(curr.cat_num)
+    Session.set("seen", seen)
     if (currArray){
       currArray.push(this)
       Session.set("studyCard", currArray)
@@ -332,6 +347,31 @@ Template.viewer.events({
 Template.homeStudyCard.helpers({
   studyCard:function(){
     return Session.get("studyCard")
+  }
+});
+Template.homeStudyCard.events({
+  "click #delete":function(){
+    // console.log(this)
+    var curr = Session.get("studyCard")
+    // console.log(curr)
+    // var index = curr.indexOf(this)
+    for (object in curr) {
+      // console.log(object)
+      // console.log(curr[object])
+      // console.log(curr[object]["cat_num"])
+      if (curr[object]["cat_num"] == this["cat_num"]){
+        // console.log("worked")
+        curr.splice(object, 1)
+        // console.log(curr)
+      }
+    }
+    Session.set("studyCard", curr)
+    // if (index > -1){
+    //   curr.splice(index, 1);
+    //
+    // }else{
+    //   console.log("derp")
+    // }
   }
 });
   Template.body.helpers({
@@ -445,10 +485,30 @@ Template.homeStudyCard.helpers({
       Session.set("logging", false)
       Session.set("browsing", true)
     },
-    "click #print":function(){
-      //console.log("printing")
-      //window.print()
+    "click #delete":function(){
+      // console.log(this)
+      var curr = Session.get("studyCard")
+      // console.log(curr)
+      // var index = curr.indexOf(this)
+      for (object in curr) {
+        // console.log(object)
+        // console.log(curr[object])
+        // console.log(curr[object]["cat_num"])
+        if (curr[object]["cat_num"] == this["cat_num"]){
+          // console.log("worked")
+          curr.splice(object, 1)
+          // console.log(curr)
+        }
+      }
+      Session.set("studyCard", curr)
+      // if (index > -1){
+      //   curr.splice(index, 1);
+      //
+      // }else{
+      //   console.log("derp")
+      // }
     }
+
   })
 
   Template.loginpage.events({
@@ -525,7 +585,8 @@ function display_next(yes){
       queue.shift();
       Session.set("queue", queue);
       $("#banner").css("font-size",60)
-      $("#banner").html("MAYBE NEXT TIME")
+      var rand = noBanners[Math.floor(Math.random() * noBanners.length)];
+      $("#banner").html(rand)
       $("#banner").removeClass("invisible")
       $("#banner").animate({
         "font-size":"76"
