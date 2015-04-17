@@ -48,3 +48,4 @@ To Use
 Known Issues:
 
 -Some Meteor wonkiness, particularly in the sign-in process and loading of suggestions on the course card.
+-In the current version 

@@ -5,9 +5,9 @@ Quincy-Dewolfe 20-05
 -->
 <template name = "bars">
   <div class = "bars">
-    <div class = "bar">Overall: {{{Overall}}}</div>
-    <div class = "bar">Difficulty: {{{Difficulty}}}</div>
-    <div class = "bar">Workload: {{Workload}}</div>
+    <div class = "bar">Overall: {{#if OverallCritical}}<b>{{{Overall}}}!</b>{{else}}{{{Overall}}}{{/if}}</div>
+    <div class = "bar">Difficulty: {{#if DifficultyCritical}} <b>{{{Difficulty}}}!</b> {{else}}{{{Difficulty}}}{{/if}}</div>
+    <div class = "bar">Workload: {{#if WorkloadCritical}}<b>{{Workload}}!</b>{{else}}{{{Workload}}}{{/if}}</div>
   </div>
   <br>
   <br>
@@ -141,7 +141,7 @@ Quincy-Dewolfe 20-05
       <table id = "studycard">
       <tr class = "head-row"><th>Title</th><th>Overall</th><th>You'll Need...</th><th></th></tr>
       {{#each studyCard}}
-      <tr><th>{{field}}: {{number}}</th><th><img src = "{{Suggestion.Icon}}"> {{Overall}}</th><th>{{Suggestion.Name}}</th><th><img id = "delete" src = "img/deleteIcon.png"></th></tr>
+      <tr><th>{{field}}: {{number}}</th><th><a href = "{{Suggestion.Url}}"><img src = "{{Suggestion.Icon}}"></a> {{Overall}}</th><th>{{Suggestion.Name}}</th><th><b id = "delete">X</b><!--<img id = "delete" src = "img/deleteIcon.png">--></th></tr>
       {{/each}}
       </table>
       {{else}}
@@ -167,7 +167,7 @@ Quincy-Dewolfe 20-05
     <!-- new_classy_logo3.png -->
   <a href = "/"><img id = "logo" src = "img/classylogo.png"></a><br>
   <!-- <div class =  "classy-font">Classy</div> -->
-  <div class = "regular-font">Your one stop shop for Harvard courses, and the alcohol you'll need to handle them!</div>
+  <div class = "regular-font">Your one stop shop for Harvard courses, and the substances you'll need to handle them!</div>
   {{> loginButtons}}
 </div>
   {{> classy_footer}}
@@ -223,7 +223,7 @@ Quincy-Dewolfe 20-05
     <table id = "studycard">
     <tr class = "head-row"><th>Title</th><th>Overall</th><th>You'll Need...</th><th></th></tr>
     {{#each studyCard}}
-    <tr><th>{{field}}: {{number}}</th><th><img src = "{{Suggestion.Icon}}"> {{Overall}}</th><th>{{Suggestion.Name}}</th><th><img id = "delete" src = "img/deleteIcon.png"></th></tr>
+    <tr><th>{{field}}: {{number}}</th><th><a href = "{{Suggestion.Url}}"><img src = "{{Suggestion.Icon}}"></a> {{Overall}}</th><th>{{Suggestion.Name}}</th><th><b id = "delete">X</b><!--<img id = "delete" src = "img/deleteIcon.png">--></th></tr>
     {{/each}}
     </table>
     {{else}}

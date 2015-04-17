@@ -8,9 +8,9 @@ var GOLD = "#BC9D52"
 
 var STATUSTODATA  = {
   "":["http://harvardlampoon.com", "drunk/sober.png"],
-  "SOBER":["http://www.urbandictionary.com/define.php?term=sober", "drunk/sober.png"],
+  "SOBER":["https://www.youtube.com/watch?v=nJ3ZM8FDBlg", "drunk/sober.png"],
   "BUZZED":["http://www.urbandictionary.com/define.php?term=buzzed", "drunk/sober.png"],
-  "HORNY":["http://www.urbandictionary.com/define.php?term=horny", "drunk/tipsy.png"],
+  "HORNY":["http://en.wikipedia.org/wiki/Horny", "drunk/tipsy.png"],
   "SLOPPY":["http://www.urbandictionary.com/define.php?term=sloppy", "drunk/buzzed.png"],
   "HAMMERED":["http://www.urbandictionary.com/define.php?term=hammered", "drunk/buzzed.png"],
   "WASTED":["http://www.urbandictionary.com/define.php?term=White+Girl+Wasted", "drunk/wasted.png"],
@@ -23,10 +23,11 @@ var STATUSES = ["", "SOBER", "BUZZED", "HORNY", "SLOPPY", "HAMMERED", "WASTED", 
 Courses = new Mongo.Collection("courses");
 Wines = new Mongo.Collection("wines");
 Drugs = new Mongo.Collection("drugs");
-var banners = ["CLASSY!", "DRINK UP!", "KEG STAND!", "SHOTS!", "WINE NIGHT!", "GOOD CHOICE!"]//["Nice!", "Got it!", "Careful!", "Yikes!", "Yesh!","What?","Smart!", "Look at your life", "Look at your choices"]
-var noBanners = ["MAYBE NEXT TIME", "TRYING TO CUT BACK"]
+var banners = ["CLASSY!", "DRINK UP!", "KEG STAND!", "SHOTS!", "WINE NIGHT!", "!","TURN UP!"]//["Nice!", "Got it!", "Careful!", "Yikes!", "Yesh!","What?","Smart!", "Look at your life", "Look at your choices"]
+var noBanners = ["MAYBE NEXT TIME", "TRYING TO CUT BACK","NAH", "OH, COME ON!"]
 var vomBanners = ["BLEARGH", "MUCH BETTER", "HOLD MY HAIR"]
 var vomNoises = ["noises/vomit1.wav", "noises/vomit2.wav"]
+var drinkNoises = ["noises/drinking.mp3", "noises/bubbles1.wav"]
 
 // SavedCourses = new Mongo.Collection("saved");
 
@@ -98,14 +99,15 @@ if (Meteor.isServer){
       var workload = (Math.random()*5).toPrecision(2)
       var overall = (((5 - workload) + (5 - difficulty)) / 2).toPrecision(2)
 
-      var wine = Math.floor((Math.random()*wineCount)+1);
+      var wine = Math.floor((Math.random()*wineCount));
       var Suggestion = wineArray[wine];
+
       curr.Difficulty = difficulty;
       curr.Workload = workload;
       curr.Overall = overall;
-      // curr.OverallCritical = false
-      // curr.WorkloadCritical = false
-      // curr.DifficultyCritical = false
+      curr.OverallCritical = false
+      curr.WorkloadCritical = false
+      curr.DifficultyCritical = false
 
       drug_probability = 50
 
@@ -115,31 +117,36 @@ if (Meteor.isServer){
         // curr.DifficultyCritical = true
         if (flip(drug_probability)){
 
-          var drug = Math.floor((Math.random()*drugCount)+1)
+          var drug = Math.floor((Math.random()*drugCount))
           Suggestion = drugArray[drug]
 
           // assign a drug
+
         }
+        curr.DifficultyCritical = true
       }
       else if (workload >= 4.5 || workload <= 0.5){
         //curr.WorkloadCritical = true
         if (flip(drug_probability)){
 
-          var drug = Math.floor((Math.random()*drugCount)+1)
+          var drug = Math.floor((Math.random()*drugCount))
           Suggestion = drugArray[drug]
           // assign a drug
         }
+        curr.WorkloadCritical = true
+
       }
       // check overall
       else if (overall >= 4.5||overall <= 0.5){
         //curr.OverallCritical = true
         if (flip(drug_probability)){
 
-          var drug = Math.floor((Math.random()*drugCount)+1)
+          var drug = Math.floor((Math.random()*drugCount))
           Suggestion = drugArray[drug]
 
           // assign a drug
         }
+        curr.OverallCritical = true
       }
 
       curr.Suggestion = Suggestion;
@@ -288,6 +295,7 @@ Template.prereqs.events({});
 
 Template.viewer.helpers({
   current:function(){
+
     return [Session.get("queue")[0]]
   }
 });
@@ -300,6 +308,9 @@ Template.viewer.events({
     display_next(false)
   },
   "click #yes":function next(e){
+    var randNoise = drinkNoises[Math.floor(Math.random() * drinkNoises.length)];
+
+    new Audio(randNoise).play();
     var curr = this
     var currArray = Session.get("studyCard")
     var seen = Session.get("seen")
@@ -322,6 +333,11 @@ Template.viewer.events({
     //   Yes.push(this);
     //   Meteor.user.Yes = Yes
     // }
+  },
+  "click a":function(e){
+    e.preventDefault()
+    var dest = $(e.target).parent().attr("href")
+    window.open(dest,'_blank');
   }
 
   // "click #no" :function next(e){
@@ -372,6 +388,16 @@ Template.homeStudyCard.events({
     // }else{
     //   console.log("derp")
     // }
+  },
+  "click a":function(e){
+    e.preventDefault()
+    var u = $(e.target).parent().attr("href")
+    if (u){
+      window.open(u,'_blank');
+    }
+    else{
+      window.open(e.target.href,'_blank');
+    }
   }
 });
   Template.body.helpers({
@@ -507,6 +533,16 @@ Template.homeStudyCard.events({
       // }else{
       //   console.log("derp")
       // }
+    },
+    "click a":function(e){
+      e.preventDefault()
+      var u = $(e.target).parent().attr("href")
+      if (u){
+        window.open(u,'_blank');
+      }
+      else{
+        window.open(e.target.href,'_blank');
+      }
     }
 
   })
