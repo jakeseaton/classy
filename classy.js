@@ -336,8 +336,11 @@ Template.viewer.events({
   },
   "click a":function(e){
     e.preventDefault()
-    var dest = $(e.target).parent().attr("href")
+    if (!e.target.href){
+      var dest = $(e.target).parent().attr("href")
     window.open(dest,'_blank');
+    }
+    
   }
 
   // "click #no" :function next(e){
